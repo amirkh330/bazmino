@@ -1,5 +1,5 @@
 import { Layout } from "@/components/lib/Layout/Layout";
-import { Login } from "@/components/Pages/Login/Login";
+import Login from "@/components/Pages/Login/Login";
 import { allRoutes } from "@/providers/routerProvider/allRoutes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
