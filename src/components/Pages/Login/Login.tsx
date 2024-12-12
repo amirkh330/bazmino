@@ -1,53 +1,128 @@
-// Import necessary libraries from Chakra UI and React
-import React from "react";
+import React, { useState } from "react";
 import {
-  ChakraProvider,
   Box,
-  Flex,
-  Heading,
-  Input,
   Button,
-  VStack,
+  Input,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
+  useDisclosure,
   Text,
 } from "@chakra-ui/react";
 
 const Login = () => {
-  const handleLogin = () => {};
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otp, setOtp] = useState("");
+  const [serverOtpKey, setServerOtpKey] = useState(null);
+  const [step, setStep] = useState("phone");
+
+  const handleSendOtp = async () => {
+    try {
+      // Replace with your API call for sending OTP
+      const response = await fetch(
+        `${import.meta.env.VITE_APP_BASE_URL}/auth/_init`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ loginIdentifier: phoneNumber }),
+        }
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        setServerOtpKey(data.otpKey); // Assuming the server responds with an OTP key
+        setStep("otp");
+        onOpen();
+      } else {
+        throw new Error(data.message || "Failed to send OTP");
+      }
+    } catch (error) {
+      console.log("====================================");
+      console.log(error);
+      console.log("====================================");
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    try {
+      // Replace with your API call for verifying OTP
+      const response = await fetch("/api/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          phoneNumber,
+          otp,
+          otpKey: serverOtpKey,
+        }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Login successful!");
+        onClose();
+      } else {
+        alert(data.message || "Failed to verify OTP");
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      alert("An error occurred while verifying OTP.");
+    }
+  };
 
   return (
-    <Flex minHeight="100vh" align="center" justify="center" bg="gray.100">
-      <Box w="full" maxW="md" p={8} borderRadius="lg" boxShadow="lg" bg="white">
-        <Heading as="h1" size="lg" textAlign="center" mb={6}>
-          Login
-        </Heading>
-        <VStack align="stretch">
-          <Box>
-            <Text mb={1} fontWeight="medium">
-              Email address
-            </Text>
-            <Input type="email" placeholder="Enter your email" />
-            <Text fontSize="sm" color="gray.500" mt={1}>
-              We'll never share your email.
-            </Text>
-          </Box>
-
-          <Box>
-            <Text mb={1} fontWeight="medium">
-              Password
-            </Text>
-            <Input type="password" placeholder="Enter your password" />
-          </Box>
-
-          <Button colorScheme="blue" size="lg" w="full" onClick={handleLogin}>
-            Login
+    <Box p={4} maxW="400px" mx="auto">
+      {step === "phone" && (
+        <>
+          <Text mb={2}>Enter your phone number:</Text>
+          <Input
+            placeholder="Phone Number"
+            value={phoneNumber}
+            type="number"
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+            }}
+            mb={4}
+          />
+          <Button colorScheme="blue" onClick={handleSendOtp}>
+            Send OTP
           </Button>
+        </>
+      )}
 
-          <Text textAlign="center" fontSize="sm" color="gray.600">
-            Don't have an account? <Button colorPalette="blue">Sign up</Button>
-          </Text>
-        </VStack>
-      </Box>
-    </Flex>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Verify OTP</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text mb={2}>Enter the OTP sent to your phone:</Text>
+            <Input
+              placeholder="OTP"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              mb={4}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" onClick={handleVerifyOtp} mr={3}>
+              Verify
+            </Button>
+            <Button variant="ghost" onClick={onClose}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </Box>
   );
 };
 

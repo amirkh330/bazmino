@@ -18,13 +18,13 @@ export const Layout = () => {
         }}
       >
         <Link to="/login">
-          <Button colorPalette="green">Login</Button>
+          <Button colorScheme="green">Login</Button>
         </Link>
         <Link to="/hossein">
-          <Button colorPalette="blue">Hossein</Button>
+          <Button colorScheme="blue">Hossein</Button>
         </Link>
         <Link to="/">
-          <Button colorPalette="gray">dashboard</Button>
+          <Button colorScheme="gray">dashboard</Button>
         </Link>
       </header>
       <main>
