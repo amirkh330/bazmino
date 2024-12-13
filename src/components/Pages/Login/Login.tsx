@@ -13,6 +13,8 @@ import {
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,62 +22,37 @@ const Login = () => {
   const [otp, setOtp] = useState("");
   const [serverOtpKey, setServerOtpKey] = useState(null);
   const [step, setStep] = useState("phone");
+  const navigate = useNavigate();
 
   const handleSendOtp = async () => {
-    try {
-      // Replace with your API call for sending OTP
-      const response = await fetch(
-        `${import.meta.env.VITE_APP_BASE_URL}/auth/_init`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ loginIdentifier: phoneNumber }),
-        }
-      );
-      const data = await response.json();
-
-      if (response.ok) {
-        setServerOtpKey(data.otpKey); // Assuming the server responds with an OTP key
+    axios
+      .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_init`, {
+        loginIdentifier: phoneNumber,
+      })
+      .then(({ data }) => {
+        setServerOtpKey(data);
         setStep("otp");
         onOpen();
-      } else {
-        throw new Error(data.message || "Failed to send OTP");
-      }
-    } catch (error) {
-      console.log("====================================");
-      console.log(error);
-      console.log("====================================");
-    }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleVerifyOtp = async () => {
-    try {
-      // Replace with your API call for verifying OTP
-      const response = await fetch("/api/verify-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          phoneNumber,
-          otp,
-          otpKey: serverOtpKey,
-        }),
+    axios
+      .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authenticate`, {
+        otp,
+        code: serverOtpKey,
+      })
+      .then(({ data }) => {
+        window.location.replace(
+          `${import.meta.env.VITE_APP_BASE_URL}/auth/_authorize?code=${data}`
+        );
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("Login successful!");
-        onClose();
-      } else {
-        alert(data.message || "Failed to verify OTP");
-      }
-    } catch (error) {
-      console.error("Error verifying OTP:", error);
-      alert("An error occurred while verifying OTP.");
-    }
   };
 
   return (
