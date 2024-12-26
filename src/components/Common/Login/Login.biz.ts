@@ -44,6 +44,7 @@ export const useLogin = () => {
   const handleReset = () => {
     setErrorMessage("");
     setPhoneNumber("");
+    setStep("phone");
     setOtp("");
   };
   const handleVerifyOtp = async () => {

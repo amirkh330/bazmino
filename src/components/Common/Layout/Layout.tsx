@@ -1,8 +1,15 @@
+import { CallApi } from "@/Settings/axiosConfig";
 import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "../Header/Header";
 
 export const Layout = () => {
+  useEffect(()=>{
+    CallApi.get("/me").then((res) => {
+      console.log(res);
+    })
+  },[])
   return (
     <Box
       maxWidth="400px"
