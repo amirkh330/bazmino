@@ -1,6 +1,6 @@
-import { Layout } from "@/components/lib/Layout/Layout";
-import Login from "@/components/Pages/Login/Login";
-import { allRoutes } from "@/providers/routerProvider/allRoutes";
+import { Layout } from "@/components/Common/Layout/Layout";
+import Login from "@/Pages/Login/Login";
+import { allRoutes } from "@/Providers/RouterProvider/allRoutes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const RouterProvider = () => {
@@ -14,7 +14,7 @@ const RouterProvider = () => {
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
-        <Route path={"/login"} element={<Login />} />
+        <Route path={"/"} element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,5 @@
-import ReactQueryProvider from "@/providers/reactQueryProvider/reactQueryProvider";
-import RouterProvider from "./routerProvider/routerProvider";
-import { ChakraProvider } from "@chakra-ui/react";
+import ReactQueryProvider from "@/Providers/ReactQueryProvider/reactQueryProvider";
+import RouterProvider from "./RouterProvider/routerProvider";
 
 const Providers = () => {
   return (
