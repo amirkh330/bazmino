@@ -1,0 +1,80 @@
+import BottomSheet from "@/components/CoreComponnets/BottomSheet/BottomSheet";
+import { Box, Button, Input, Text, useDisclosure } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+interface ILogin {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}
+const phoneRegex = /^09\d{9}$/;
+export const useLogin = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otp, setOtp] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [serverOtpKey, setServerOtpKey] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState<"phone" | "otp">("phone");
+  const handleSendOtp = async () => {
+    setLoading(true);
+    axios
+      .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_init`, {
+        loginIdentifier: phoneNumber,
+      })
+      .then(({ data }) => {
+        setServerOtpKey(data);
+        setStep("otp");
+      })
+      .catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoading(false);
+      })
+  };
+
+  const handleSetPhoneNumber = () => {
+    if (phoneRegex.test(phoneNumber)) {
+      handleSendOtp();
+    } else {
+      setErrorMessage("شماره وارد شده صحیح نیست");
+    }
+  };
+
+  const handleReset = () => {
+    setErrorMessage("");
+    setPhoneNumber("");
+    setOtp("");
+  };
+  const handleVerifyOtp = async () => {
+    axios
+      .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authenticate`, {
+        otp,
+        code: serverOtpKey,
+      })
+      .then(({ data }) => {
+        window.location.replace(
+          `${import.meta.env.VITE_APP_BASE_URL}/auth/_authorize?code=${data}`
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  return {
+    handleSetPhoneNumber,
+    loading,
+    setLoading,
+    errorMessage,
+    handleReset,
+    setErrorMessage,
+    handleSendOtp,
+    handleVerifyOtp,
+    phoneNumber,
+    setPhoneNumber,
+    setStep,
+    otp,
+    setOtp,
+    step,
+  };
+};

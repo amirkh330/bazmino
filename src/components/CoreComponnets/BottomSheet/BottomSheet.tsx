@@ -1,57 +1,38 @@
 import {
-    Box,
-    Button,
-    Slide,
-    useDisclosure
-} from '@chakra-ui/react';
-import React from 'react';
+  Box,
+  CloseButton,
+  Flex,
+  Slide,
+  Text
+} from "@chakra-ui/react";
 
-
-const BottomSheet: React.FC = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+interface IBottomSheet {
+  title: string;
+  children: React.ReactNode;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}
+const BottomSheet = ({ title, children, isOpen, onClose }: IBottomSheet) => {
   return (
-      <Box textAlign="center" p="6">
-        <Button colorScheme="blue" onClick={onOpen}>
-          Open Bottom Sheet
-        </Button>
-
-        <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
-          <Box
-            position="fixed"
-            bottom="0"
-            left="0"
-            width="100%"
-            maxWidth="400px"
-            mx="auto"
-            bg="white"
-            p="6"
-            boxShadow="md"
-            borderTopRadius="md"
+    <Box textAlign="center" p="6" maxW={"400px"}>
+      <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
+        <Box bg="white" p="6" boxShadow="md" borderTopRadius="md">
+          <Box height="5px" bg="gray.300" borderRadius="full" mb="4" />
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            mb="4"
+            borderBottom={"1px solid"}
+            pb="4"
           >
-            <Box
-              height="5px"
-              width="40px"
-              bg="gray.300"
-              borderRadius="full"
-              mx="auto"
-              mb="4"
-            />
-            <Button
-              variant="ghost"
-              colorScheme="blue"
-              onClick={onClose}
-              mb="4"
-            >
-              Close
-            </Button>
-            <Box>
-              Add your bottom sheet content here. This could include forms,
-              actions, or additional navigation options.
-            </Box>
-          </Box>
-        </Slide>
-      </Box>
+            <Text>{title}</Text>
+            <CloseButton onClick={onClose}/>
+          </Flex>
+          <Box>{children}</Box>
+        </Box>
+      </Slide>
+    </Box>
   );
 };
 
