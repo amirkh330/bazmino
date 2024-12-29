@@ -7,7 +7,7 @@ import { Header } from "../Header/Header";
 export const Layout = () => {
   useEffect(()=>{
     CallApi.get("/me").then((res) => {
-      console.log(res);
+      console.log(res.data);
     })
   },[])
   return (

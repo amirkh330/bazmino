@@ -14,8 +14,24 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 3000,
-      open: mode === "development",
-      host: true,
+      proxy: {
+        "/api": {
+          target: "https://bazmino.com",
+          changeOrigin: true,
+          secure: true, // Ensures HTTPS connection
+          cookieDomainRewrite: "localhost", // Rewrites cookies for localhost
+          rewrite: (path) => {
+            const rewrittenPath = path.replace(/^\/api/, "/api/v1");
+            return rewrittenPath;
+          },
+          configure: (proxy) => {
+            proxy.on("proxyReq", (proxyReq, req) => {
+              // Optional: Log headers to debug
+              console.log("Request Headers:", proxyReq.getHeaders());
+            });
+          },
+        },
+      },
     },
     preview: {
       port: 3000,

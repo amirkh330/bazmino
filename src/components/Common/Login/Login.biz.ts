@@ -28,9 +28,10 @@ export const useLogin = () => {
       })
       .catch((err) => {
         console.log(err);
-      }).finally(() => {
-        setLoading(false);
       })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const handleSetPhoneNumber = () => {
@@ -54,9 +55,7 @@ export const useLogin = () => {
         code: serverOtpKey,
       })
       .then(({ data }) => {
-        window.location.replace(
-          `${import.meta.env.VITE_APP_BASE_URL}/auth/_authorize?code=${data}`
-        );
+        window.location.replace(`/api/auth/_authorize?code=${data}`);
       })
       .catch((err) => {
         console.log(err);
