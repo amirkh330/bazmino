@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 export const CallApi: AxiosInstance = axios.create({
-  baseURL: "/api",
+  baseURL: "",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

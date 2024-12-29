@@ -55,7 +55,7 @@ export const useLogin = () => {
         code: serverOtpKey,
       })
       .then(({ data }) => {
-        window.location.replace(`/api/auth/_authorize?code=${data}`);
+        window.location.replace(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authorize?code=${data}`);
       })
       .catch((err) => {
         console.log(err);

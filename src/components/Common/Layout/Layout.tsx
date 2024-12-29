@@ -6,7 +6,7 @@ import { Header } from "../Header/Header";
 
 export const Layout = () => {
   useEffect(()=>{
-    CallApi.get("/me").then((res) => {
+    CallApi.get(`${import.meta.env.VITE_APP_BASE_URL}/me`).then((res) => {
       console.log(res.data);
     })
   },[])

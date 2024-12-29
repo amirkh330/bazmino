@@ -20,14 +20,11 @@ export default defineConfig(() => {
           changeOrigin: true,
           secure: true, // Ensures HTTPS connection
           cookieDomainRewrite: "localhost", // Rewrites cookies for localhost
-          rewrite: (path) => {
-            const rewrittenPath = path.replace(/^\/api/, "/api/v1");
-            return rewrittenPath;
-          },
+         // rewrite: path => path.replace(/^\/api/, ''),
           configure: (proxy) => {
             proxy.on("proxyReq", (proxyReq) => {
               // Optional: Log headers to debug
-              console.log("Request Headers:", proxyReq.getHeaders());
+              console.log("Request Headers:", proxyReq.path);
             });
           },
         },
