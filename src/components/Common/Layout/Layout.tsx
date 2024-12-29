@@ -1,4 +1,4 @@
-import { CallApi } from "@/Settings/axiosConfig";
+import { CallApi } from "@/settings/axiosConfig";
 import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";

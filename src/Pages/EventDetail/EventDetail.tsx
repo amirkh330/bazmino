@@ -1,4 +1,4 @@
-import { CallApi } from "@/Settings/axiosConfig";
+import { CallApi } from "@/settings/axiosConfig";
 import {
   Box,
   Button,

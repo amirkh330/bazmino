@@ -1,6 +1,6 @@
 import { Layout } from "@/components/Common/Layout/Layout";
 import Login from "@/Pages/Login/Login";
-import { allRoutes } from "@/Providers/RouterProvider/allRoutes";
+import { allRoutes } from "@/providers/routerProvider/allRoutes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const RouterProvider = () => {

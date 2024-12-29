@@ -6,7 +6,8 @@ import {
 } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { APIError } from "@/Types/apiError/apiError";
+import { APIError } from "@/types/apiError/apiError";
+
 
 declare module "@tanstack/react-query" {
   interface Register {

@@ -1,5 +1,5 @@
-import { CallApi } from "@/Settings/axiosConfig";
-import { GlobalData } from "@/Types/responses/ResponsesTypes";
+import { CallApi } from "@/settings/axiosConfig";
+import { GlobalData } from "@/types/responses/ResponsesTypes";
 
 const getSingleAwardsQueryFn = (
   id: number
