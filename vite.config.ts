@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(() => {
   return {
     plugins: [react(), tsconfigPaths()],
     resolve: {
@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => {
             return rewrittenPath;
           },
           configure: (proxy) => {
-            proxy.on("proxyReq", (proxyReq, req) => {
+            proxy.on("proxyReq", (proxyReq) => {
               // Optional: Log headers to debug
               console.log("Request Headers:", proxyReq.getHeaders());
             });
