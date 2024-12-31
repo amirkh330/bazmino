@@ -12,8 +12,10 @@ import {
 } from "@chakra-ui/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import React from "react";
+import { useEvents } from "./Events.biz";
 
 export const Events = () => {
+  const { eventList } = useEvents();
   return (
     <div>
       <InputGroup
@@ -27,7 +29,6 @@ export const Events = () => {
         border="1px"
         borderRadius={"8px"}
         borderColor="gray.400"
-     
       >
         <InputRightElement pointerEvents="none" m="3" me="4">
           <Icon>
@@ -63,11 +64,9 @@ export const Events = () => {
       <FilterSecession />
       <Box h="58vh" overflowY="auto">
         <Grid templateColumns="repeat(2, 1fr)">
-          {Array(10)
-            .fill(0)
-            .map((_, i) => {
-              return <EventCard />;
-            })}
+          {eventList.map((event) => {
+            return <EventCard event={event} />;
+          })}
         </Grid>
       </Box>
     </div>

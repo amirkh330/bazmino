@@ -8,7 +8,6 @@ import { Footer } from "../Footer/Footer";
 export const Layout = () => {
   useEffect(() => {
     CallApi.get(`${import.meta.env.VITE_APP_BASE_URL}/me`).then((res) => {
-      console.log(res.data);
     });
   }, []);
   return (

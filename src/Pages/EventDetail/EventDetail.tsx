@@ -41,7 +41,7 @@ export const EventDetail = () => {
   console.log("phoneNumbers", phoneNumbers);
 
   const handleReserve = () => {
-    CallApi.post("events/1005/orders", { phoneNumbers: [...phoneNumbers] })
+    CallApi.post("/events/1005/orders", { phoneNumbers: [...phoneNumbers] })
       .then(() => {
         navigate("/checkout/1005");
       })

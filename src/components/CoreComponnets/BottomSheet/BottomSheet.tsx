@@ -37,6 +37,7 @@ const BottomSheet = ({ title, children, isOpen, onClose }: IBottomSheet) => {
         right="0"
         bottom="0"
         left="0"
+        zIndex="10"
         bg="blackAlpha.600"
         backdropFilter="blur(10px)"
       ></Box>

@@ -16,7 +16,7 @@ export const Header = () => {
     >
       <Flex m="0" alignItems="center" gap="2" onClick={logout}>
         <Icon as={List} size={18} />
-        <Text>جوریچین</Text>
+        <Text>بزمینو</Text>
       </Flex>
 
       {isAuth ? (
