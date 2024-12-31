@@ -10,13 +10,14 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useLogin } from "./Login.biz";
+import { persianToEnglishNumbers } from "@/utils/convertNumber/ConvertNumber";
 
 interface ILogin {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
-export const Login = ({ isOpen, onOpen, onClose }: ILogin) => {
+export const Login = ({ isOpen = true, onOpen, onClose }: ILogin) => {
   const {
     handleSendOtp,
     handleSetPhoneNumber,
@@ -77,19 +78,19 @@ const PhoneNumberStep = ({
   loading,
 }: any) => {
   return (
-    <Box color="amir.mainBg">
+    <Box color="amir.mainBg" p="4">
       <Flex mb="4">
-        <Text>شماره تلفن خود را وارد کنید</Text>
+        <Text color={"amir.common"}>شماره تلفن خود را وارد کنید</Text>
       </Flex>
       <Input
         mb="4"
         placeholder="09123456789"
         dir="ltr"
-        color="amir.mainBg"
-        _placeholder="amir.main"
+        color="amir.common"
+        _placeholder="amir.common"
         value={phoneNumber}
         onChange={(e) => {
-          setPhoneNumber(e.target.value);
+          setPhoneNumber(persianToEnglishNumbers(e.target.value));
           errorMessage && setErrorMessage("");
         }}
       />
@@ -99,7 +100,7 @@ const PhoneNumberStep = ({
         </Text>
       )}
       <Button
-        colorScheme="blue"
+        bg={"amir.primary"}
         w={"100%"}
         onClick={handleSetPhoneNumber}
         isLoading={loading}
@@ -110,11 +111,11 @@ const PhoneNumberStep = ({
   );
 };
 
-const OtpStep = ({ otp, setOtp, handleSendOtp }: any) => {
+const OtpStep = ({ otp, setOtp, handleSendOtp ,loading}: any) => {
   return (
-    <Box mx="auto">
+    <Box mx="auto" p="4">
       <Text>کد ارسال شده را وارد کنید</Text>
-      <HStack my="4" justifyContent={"space-around"} mx="8" dir="ltr">
+      <HStack my="6" justifyContent={"space-around"} mx="8" dir="ltr">
         <PinInput value={otp} onChange={setOtp}>
           <PinInputField />
           <PinInputField />
@@ -122,7 +123,14 @@ const OtpStep = ({ otp, setOtp, handleSendOtp }: any) => {
           <PinInputField />
         </PinInput>
       </HStack>
-      <Button colorScheme="blue" w={"100%"} onClick={handleSendOtp}>
+      <Button
+        my="2"
+        isDisabled={otp.length !== 4}
+        isLoading={loading}
+        bg={"amir.primary"}
+        w={"100%"}
+        onClick={handleSendOtp}
+      >
         ورود
       </Button>
     </Box>

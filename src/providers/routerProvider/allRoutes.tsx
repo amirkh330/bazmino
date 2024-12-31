@@ -9,7 +9,7 @@ import { RouteObject } from "react-router-dom";
 export const allRoutes: Array<RouteObject> = [
   // { path: "/", element: <Dashboard /> },
   { path: "/events", element: <Events /> },
-  { path: "/coffee-shops", element: <CoffeesShops /> },
+  { path: "/", element: <CoffeesShops /> },
   { path: "/reserves", element: <Reserves /> },
   { path: "/event-detail/:id", element: <EventDetail /> },
   { path: "*", element: <NotFound /> },

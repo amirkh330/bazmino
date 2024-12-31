@@ -9,7 +9,7 @@ export const Footer = () => {
   const isActive = (url: string) => pathname !== url;
   const list = [
     { icon: <PuzzlePiece size="20" />, text: "بازی", url: "/events" },
-    { icon: <Coffee size="20" />, text: "کافه", url: "/coffee-shops" },
+    { icon: <Coffee size="20" />, text: "کافه", url: "/" },
     { icon: <Ticket size="20" />, text: "رزروهای من", url: "/reserves" },
   ];
   return (

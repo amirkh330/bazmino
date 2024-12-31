@@ -30,7 +30,7 @@ export const Events = () => {
         borderRadius={"8px"}
         borderColor="gray.400"
       >
-        <InputRightElement pointerEvents="none" m="3" me="4">
+        <InputRightElement pointerEvents="none" >
           <Icon>
             <MagnifyingGlass size={24} />
           </Icon>
@@ -39,7 +39,7 @@ export const Events = () => {
           placeholder="جستوجو"
           bg="transparent"
           width="full"
-          p="1"
+          // p="1"
           ps="8"
           border="none"
           _placeholder={{ color: "amir.common" }}
