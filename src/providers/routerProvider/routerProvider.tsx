@@ -11,7 +11,7 @@ const RouterProvider = () => {
     >
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Navigate to="/events" />} />
+          {/* <Route path="/" element={<Navigate to="/events" />} /> */}
           {allRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}

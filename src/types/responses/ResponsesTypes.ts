@@ -25,3 +25,8 @@ export interface IHost {
   district: string;
   logoUrl: string;
 }
+
+export enum GameMode {
+  mafia = "mafia",
+  golyapoch = "golyapoch",
+}

@@ -11,9 +11,16 @@ import {
 } from "@chakra-ui/react";
 import { useFilterSecession } from "./FilterSecession.biz";
 import BottomSheet from "../BottomSheet/BottomSheet";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { CustomDatePicker } from "../CustomDatePicker/CustomDatePicker";
-// import GolYaPoch from "@/images/golyapooch.svg";
+import { GameMode } from "@/types/responses/ResponsesTypes";
+import { useState } from "react";
+import { DateObject } from "react-multi-date-picker";
+import gregorian from "react-date-object/calendars/gregorian";
+import gregorian_en from "react-date-object/locales/gregorian_en";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import { FilterView } from "../FilterView/FilterView";
 
 export const FilterSecession = () => {
   const {
@@ -23,7 +30,9 @@ export const FilterSecession = () => {
     setWhereFilterVisible,
     typeFilterVisible,
     setTypeFilterVisible,
+    handleFilterChange
   } = useFilterSecession();
+
   return (
     <Box my="1">
       <Flex gap="8" alignItems={"center"} my="4">
@@ -37,36 +46,26 @@ export const FilterSecession = () => {
           <Text fontSize={"16px"}>کجا بریم؟</Text>
         </Box>
       </Flex>
-      <Flex my="2" justifyContent={"flex-start"}>
-        <Tag
-          borderRadius={"6px"}
-          gap="8px"
-          py="1"
-          mx="0" 
-          px="12px"
-          bgColor={"amir.primary"}
-          color={"amir.mainBg"}
-          fontSize={"16px"}
-        >
-          اسب
-          <CloseButton fontSize="10px" />
-        </Tag>
-      </Flex>
+      <FilterView />
       <TimeFilterModal
         isOpen={timeFilterVisible}
         onClose={() => setTimeFilterVisible(false)}
+        handleFilterChange={handleFilterChange}
       />
       <TypeFilterModal
         isOpen={typeFilterVisible}
         onClose={() => setTypeFilterVisible(false)}
+        handleFilterChange={handleFilterChange}
       />
       <WhereFilterModal
         isOpen={whereFilterVisible}
         onClose={() => setWhereFilterVisible(false)}
+        handleFilterChange={handleFilterChange}
       />
     </Box>
   );
 };
+
 const boxStyles = {
   w: "92",
   borderRadius: "6px",
@@ -80,11 +79,29 @@ const boxStyles = {
 const TimeFilterModal = ({
   isOpen,
   onClose,
+  handleFilterChange
 }: {
   isOpen: boolean;
   onClose: () => void;
+  handleFilterChange: (key: string, value: string) => void;
 }) => {
   if (!isOpen) return null;
+  const [selectDate, setSelectDate] = useState(new DateObject());
+  const navigate = useNavigate();
+  const [searchParams,setSearchParams] = useSearchParams();
+
+  const handleSetTime = () => {
+    selectDate.toString();
+    // const time = selectDate
+    //   .convert(gregorian, gregorian_en)
+    //   .format("YYYY-MM-DDT");
+    const time = selectDate.convert(persian, persian_fa).format("YYYY/MM/DD");
+    const filter = searchParams.get("time");
+    handleFilterChange("time", time);
+    // setSearchParams({time});
+    // navigate(`?time=${time}`);
+    onClose();
+  };
   return (
     <BottomSheet
       title={"کی بازی کنیم؟"}
@@ -93,13 +110,14 @@ const TimeFilterModal = ({
       onClose={onClose}
     >
       <Box p="4">
-        <CustomDatePicker setValue={{}} value={""} />
+        <CustomDatePicker setValue={setSelectDate} value={selectDate} />
         <Button
           w="full"
           p="2"
           bgColor={"amir.primary"}
           borderRadius={"8px"}
           my="4"
+          onClick={handleSetTime}
         >
           تائید تاریخ بازی
         </Button>
@@ -111,9 +129,11 @@ const TimeFilterModal = ({
 const WhereFilterModal = ({
   isOpen,
   onClose,
+  handleFilterChange
 }: {
   isOpen: boolean;
   onClose: () => void;
+  handleFilterChange: (key: string, value: string) => void;
 }) => {
   if (!isOpen) return null;
   return (
@@ -139,14 +159,17 @@ const WhereFilterModal = ({
 const TypeFilterModal = ({
   isOpen,
   onClose,
+  handleFilterChange
 }: {
   isOpen: boolean;
   onClose: () => void;
+  handleFilterChange: (key: string, value: string) => void;
 }) => {
   if (!isOpen) return null;
-  const navigate = useNavigate();
-  const handleSetType = (type: string) => {
-    navigate(`/?type=${type}`);
+    const handleSetType = (type: string) => {
+    handleFilterChange("type", type);
+    onClose();
+  
   };
   return (
     <BottomSheet
@@ -166,7 +189,7 @@ const TypeFilterModal = ({
           bg={"amir.secondaryBg"}
           borderRadius="8px"
           cursor="pointer"
-          onClick={() => handleSetType("gol")}
+          onClick={() => handleSetType(GameMode.mafia)}
         >
           <Image src="images/mafia.svg" />
           <Text fontSize={"16px"} fontWeight={500} color={"amir.common"}>
@@ -183,7 +206,7 @@ const TypeFilterModal = ({
           alignItems="center"
           flexDirection="column"
           bg={"amir.secondaryBg"}
-          onClick={() => handleSetType("gol")}
+          onClick={() => handleSetType(GameMode.golyapoch)}
         >
           <Image src="images/golyapooch.svg" />
           <Text fontSize={"16px"} fontWeight={500} color={"amir.common"}>
