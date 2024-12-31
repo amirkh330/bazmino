@@ -3,25 +3,21 @@ import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "../Header/Header";
+import { Footer } from "../Footer/Footer";
 
 export const Layout = () => {
-  useEffect(()=>{
+  useEffect(() => {
     CallApi.get(`${import.meta.env.VITE_APP_BASE_URL}/me`).then((res) => {
       console.log(res.data);
-    })
-  },[])
+    });
+  }, []);
   return (
-    <Box
-      maxWidth="400px"
-      width="100%"
-      mx="auto"
-      p="4"
-      bg="gray.50"
-      height="100vh"
-      boxShadow="md"
-    >
+    <Box maxWidth="400px" width="100%" bg="amir.mainBg" height="100vh">
       <Header />
-      <Outlet />
+      <Box mx="auto" p="4" height="85vh">
+        <Outlet />
+      </Box>
+      <Footer />
     </Box>
   );
 };
