@@ -1,7 +1,18 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  CloseButton,
+  Flex,
+  Image,
+  Select,
+  Tag,
+  Text,
+} from "@chakra-ui/react";
 import { useFilterSecession } from "./FilterSecession.biz";
 import BottomSheet from "../BottomSheet/BottomSheet";
 import { useNavigate } from "react-router-dom";
+import { CustomDatePicker } from "../CustomDatePicker/CustomDatePicker";
 // import GolYaPoch from "@/images/golyapooch.svg";
 
 export const FilterSecession = () => {
@@ -14,17 +25,33 @@ export const FilterSecession = () => {
     setTypeFilterVisible,
   } = useFilterSecession();
   return (
-    <Flex gap="8" alignItems={"center"}>
-      <Box {...boxStyles} onClick={() => setTypeFilterVisible(true)}>
-        <Text fontSize={"16px"}>چی بازی؟</Text>
-      </Box>
-      <Box {...boxStyles} onClick={() => setTimeFilterVisible(true)}>
-        <Text fontSize={"16px"}>کِی بریم؟</Text>
-      </Box>
-      <Box {...boxStyles} onClick={() => setWhereFilterVisible(true)}>
-        <Text fontSize={"16px"}>کجا بریم؟</Text>
-      </Box>
-
+    <>
+      <Flex gap="8" alignItems={"center"}>
+        <Box {...boxStyles} onClick={() => setTypeFilterVisible(true)}>
+          <Text fontSize={"16px"}>چی بازی؟</Text>
+        </Box>
+        <Box {...boxStyles} onClick={() => setTimeFilterVisible(true)}>
+          <Text fontSize={"16px"}>کِی بریم؟</Text>
+        </Box>
+        <Box {...boxStyles} onClick={() => setWhereFilterVisible(true)}>
+          <Text fontSize={"16px"}>کجا بریم؟</Text>
+        </Box>
+      </Flex>
+      <Flex my="4" justifyContent={"flex-start"}>
+        <Tag
+          borderRadius={"6px"}
+          gap="8px"
+          py="1"
+          mx="0" 
+          px="12px"
+          bgColor={"amir.primary"}
+          color={"amir.mainBg"}
+          fontSize={"16px"}
+        >
+          اسب
+          <CloseButton fontSize="10px" />
+        </Tag>
+      </Flex>
       <TimeFilterModal
         isOpen={timeFilterVisible}
         onClose={() => setTimeFilterVisible(false)}
@@ -37,7 +64,7 @@ export const FilterSecession = () => {
         isOpen={whereFilterVisible}
         onClose={() => setWhereFilterVisible(false)}
       />
-    </Flex>
+    </>
   );
 };
 const boxStyles = {
@@ -65,7 +92,18 @@ const TimeFilterModal = ({
       onOpen={() => {}}
       onClose={onClose}
     >
-      <>ی باتم شیت</>
+      <Box p="4">
+        <CustomDatePicker setValue={{}} value={""} />
+        <Button
+          w="full"
+          p="2"
+          bgColor={"amir.primary"}
+          borderRadius={"8px"}
+          my="4"
+        >
+          تائید تاریخ بازی
+        </Button>
+      </Box>
     </BottomSheet>
   );
 };
@@ -85,7 +123,15 @@ const WhereFilterModal = ({
       onOpen={() => {}}
       onClose={onClose}
     >
-      <>ی باتم شیت</>
+      <Box p="4">
+        <Flex alignItems={"center"} gap="2" justifyContent={"flex-start"}>
+          <Checkbox color="amir.primary">
+            <Text color="amir.common" fontSize={"16px"}>
+              ری
+            </Text>
+          </Checkbox>
+        </Flex>
+      </Box>
     </BottomSheet>
   );
 };
