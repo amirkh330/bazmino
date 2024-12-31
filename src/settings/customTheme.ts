@@ -8,6 +8,7 @@ export const customTheme = extendBaseTheme({
       secondaryBg: "#414141",
       primary: "#AFE239",
       secondary: "#CDCDCD",
+      secondaryVariant: "#AFAFAF",
       common: "#FFFFFF",
     },
   },

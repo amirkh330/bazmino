@@ -12,18 +12,19 @@ const BottomSheet = ({ title, children, isOpen, onClose }: IBottomSheet) => {
   return (
     <>
       <Box textAlign="center" p="6" maxW={"400px"}>
-        <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
-          <Box bg="white" p="6" boxShadow="md" borderTopRadius="md">
-            <Box height="5px" bg="gray.300" borderRadius="full" mb="4" />
+        <Slide direction="bottom" in={isOpen} style={{ zIndex: 20 }}>
+          <Box bg={"amir.mainBg"} boxShadow="md" borderTopRadius="md">
             <Flex
+              p="6"
               justifyContent="space-between"
               alignItems="center"
               mb="4"
-              borderBottom={"1px solid"}
               pb="4"
             >
-              <Text>{title}</Text>
-              <CloseButton onClick={onClose} />
+              <Text fontWeight={500} fontSize={"16px"} color={"amir.common"}>
+                {title}
+              </Text>
+              <CloseButton onClick={onClose} color={"amir.common"} />
             </Flex>
             <Box>{children}</Box>
           </Box>
