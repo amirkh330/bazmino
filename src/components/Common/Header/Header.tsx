@@ -16,12 +16,7 @@ export const Header = () => {
         <Icon as={List} size={18} />
         <Text>جوریچین</Text>
       </Flex>
-      {/* <InputGroup w="70%" m="0">
-          <InputLeftElement pointerEvents="none">
-            <MagnifyingGlass size={24} />
-          </InputLeftElement>
-          <Input placeholder="جستوجو" />
-        </InputGroup> */}
+      
       <Box onClick={onOpen} m={0}>
         <User size={24} />
       </Box>

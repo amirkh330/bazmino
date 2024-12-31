@@ -25,8 +25,8 @@ export const FilterSecession = () => {
     setTypeFilterVisible,
   } = useFilterSecession();
   return (
-    <>
-      <Flex gap="8" alignItems={"center"}>
+    <Box my="1">
+      <Flex gap="8" alignItems={"center"} my="4">
         <Box {...boxStyles} onClick={() => setTypeFilterVisible(true)}>
           <Text fontSize={"16px"}>چی بازی؟</Text>
         </Box>
@@ -37,7 +37,7 @@ export const FilterSecession = () => {
           <Text fontSize={"16px"}>کجا بریم؟</Text>
         </Box>
       </Flex>
-      <Flex my="4" justifyContent={"flex-start"}>
+      <Flex my="2" justifyContent={"flex-start"}>
         <Tag
           borderRadius={"6px"}
           gap="8px"
@@ -64,7 +64,7 @@ export const FilterSecession = () => {
         isOpen={whereFilterVisible}
         onClose={() => setWhereFilterVisible(false)}
       />
-    </>
+    </Box>
   );
 };
 const boxStyles = {
