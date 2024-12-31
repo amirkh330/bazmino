@@ -2,6 +2,7 @@ import BottomSheet from "@/components/CoreComponnets/BottomSheet/BottomSheet";
 import { Box, Button, Input, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import useAuthStore from "@/store/authStore";
 
 interface ILogin {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export const useLogin = () => {
   const [serverOtpKey, setServerOtpKey] = useState(null);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<"phone" | "otp">("phone");
+  const { login:handleLogin} = useAuthStore();
   const handleSendOtp = async () => {
     setLoading(true);
     axios
@@ -24,6 +26,7 @@ export const useLogin = () => {
       })
       .then(({ data }) => {
         setServerOtpKey(data);
+        handleLogin();
         setStep("otp");
       })
       .catch((err) => {
@@ -48,6 +51,7 @@ export const useLogin = () => {
     setStep("phone");
     setOtp("");
   };
+
   const handleVerifyOtp = async () => {
     axios
       .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authenticate`, {
@@ -55,12 +59,15 @@ export const useLogin = () => {
         code: serverOtpKey,
       })
       .then(({ data }) => {
-        window.location.replace(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authorize?code=${data}`);
+        window.location.replace(
+          `${import.meta.env.VITE_APP_BASE_URL}/auth/_authorize?code=${data}`
+        );
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   return {
     handleSetPhoneNumber,
     loading,

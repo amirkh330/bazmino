@@ -8,9 +8,7 @@ import {
   PinInput,
   PinInputField,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
 import { useLogin } from "./Login.biz";
 
 interface ILogin {
@@ -37,7 +35,6 @@ export const Login = ({ isOpen, onOpen, onClose }: ILogin) => {
   } = useLogin();
 
   if (!isOpen) return null;
-  console.log(step);
 
   return (
     <BottomSheet
@@ -80,7 +77,7 @@ const PhoneNumberStep = ({
   loading,
 }: any) => {
   return (
-    <Box>
+    <Box color="amir.mainBg">
       <Flex mb="4">
         <Text>شماره تلفن خود را وارد کنید</Text>
       </Flex>
@@ -88,6 +85,8 @@ const PhoneNumberStep = ({
         mb="4"
         placeholder="09123456789"
         dir="ltr"
+        color="amir.mainBg"
+        _placeholder="amir.main"
         value={phoneNumber}
         onChange={(e) => {
           setPhoneNumber(e.target.value);
@@ -99,7 +98,12 @@ const PhoneNumberStep = ({
           {errorMessage}
         </Text>
       )}
-      <Button colorScheme="blue" w={"100%"} onClick={handleSetPhoneNumber} isLoading={loading}>
+      <Button
+        colorScheme="blue"
+        w={"100%"}
+        onClick={handleSetPhoneNumber}
+        isLoading={loading}
+      >
         ارسال
       </Button>
     </Box>
@@ -108,7 +112,7 @@ const PhoneNumberStep = ({
 
 const OtpStep = ({ otp, setOtp, handleSendOtp }: any) => {
   return (
-    <Box>
+    <Box mx="auto">
       <Text>کد ارسال شده را وارد کنید</Text>
       <HStack my="4" justifyContent={"space-around"} mx="8" dir="ltr">
         <PinInput value={otp} onChange={setOtp}>

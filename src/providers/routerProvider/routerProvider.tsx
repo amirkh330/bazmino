@@ -1,20 +1,21 @@
 import { Layout } from "@/components/Common/Layout/Layout";
+import { Events } from "@/Pages/Events/Events";
 import Login from "@/Pages/Login/Login";
 import { allRoutes } from "@/providers/routerProvider/allRoutes";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 const RouterProvider = () => {
   return (
     <BrowserRouter
-      // future={{ v7_relativeSplatPath: true, v7_startTransition: true }}
+    // future={{ v7_relativeSplatPath: true, v7_startTransition: true }}
     >
       <Routes>
         <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/events" />} />
           {allRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
-        <Route path={"/"} element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
