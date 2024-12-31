@@ -1,27 +1,10 @@
 import { IEventItem } from "@/types/responses/ResponsesTypes";
+import { Toman } from "@/utils/Toman/Toman";
 import { Box, Card, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { Calendar } from "@phosphor-icons/react";
 import { Coffee, Users } from "@phosphor-icons/react/dist/ssr";
-import { DateObject } from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import { Toman } from "@/utils/Toman/Toman";
 export const EventCard = ({ event }: { event: IEventItem }) => {
-  // const convertDate = () => {
-  //   const date = new DateObject();
-  //   date.setDate(event.dateTime);
-  //   const formattedInput = event.dateTime.replace("-", " ").replace(" ", " ").trim();
-  //   console.log("amir", formattedInput);
-  //   var date1 = new DateObject("2020 8 21 11 55 36 100 am");
-
-  //   console.log(date1.format("YYYY/MM/DD hh:mm:ss.SSS a"));
-
-  //   console.log(date.format("YYYY/MM/DD"));
-  //   console.log(date.format("dddd DD MMMM YYYY"));
-
-  //   return date.format("D MMMM - HH:mm");
-  // };
-  // console.log(convertDate());
+  
   const isShowDiscount = event.basePrice !== event.finalPrice;
 
   return (
