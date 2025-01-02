@@ -6,7 +6,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 
 export const FilterView = ({ districtsList }: any) => {
-  console.log('districtsList:', districtsList)
+  console.log("districtsList:", districtsList);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const list = Array.from(searchParams.entries()).map(([key, value]) => {
@@ -19,7 +19,6 @@ export const FilterView = ({ districtsList }: any) => {
   };
 
   const renderItem = (item: { type: string; value: string }) => {
-   
     switch (item.type) {
       case "date":
         return new DateObject(item.value)
@@ -29,7 +28,8 @@ export const FilterView = ({ districtsList }: any) => {
         return item.value == "mafia" ? "مافیا" : "گل یا پوچ";
 
       default:
-        return districtsList?.find((district: any) => district.id == item.value)?.title
+        return districtsList?.find((district: any) => district.id == item.value)
+          ?.title;
       // return districtsList?.find((district: any) => district._id == item.value)
       //   .title;
     }
@@ -41,6 +41,7 @@ export const FilterView = ({ districtsList }: any) => {
         if (!item) return null;
         return (
           <Tag
+            minW={"auto"}
             key={item.type}
             borderRadius={"6px"}
             gap="8px"
