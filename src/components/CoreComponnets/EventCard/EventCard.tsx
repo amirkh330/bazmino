@@ -4,7 +4,6 @@ import { Box, Card, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { Calendar } from "@phosphor-icons/react";
 import { Coffee, Users } from "@phosphor-icons/react/dist/ssr";
 export const EventCard = ({ event }: { event: IEventItem }) => {
-  
   const isShowDiscount = event.basePrice !== event.finalPrice;
 
   return (
@@ -50,12 +49,11 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
           </Text>
         </Flex>
         <Flex mx="0" alignItems={"center"} justifyContent="space-between">
-          <Flex mx="0" alignItems={"center"} gap="1">
+          <Flex mx="0" alignItems={"center"} gap="1" flexWrap={"nowrap"}>
             <Icon mx="0" as={Calendar} />
 
             <Text fontSize={"10px"} color="amir.secondary">
-              {/* ۲۳ اسفند -۱۲:۰۰ */}
-              {/* {convertDate()} */}
+              {event.dateTime}
             </Text>
           </Flex>
           <Flex mx="0" alignItems={"center"} gap="1">

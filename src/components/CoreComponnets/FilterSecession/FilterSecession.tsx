@@ -30,7 +30,7 @@ export const FilterSecession = () => {
     setWhereFilterVisible,
     typeFilterVisible,
     setTypeFilterVisible,
-    handleFilterChange
+    handleFilterChange,
   } = useFilterSecession();
 
   return (
@@ -79,7 +79,7 @@ const boxStyles = {
 const TimeFilterModal = ({
   isOpen,
   onClose,
-  handleFilterChange
+  handleFilterChange,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -87,8 +87,6 @@ const TimeFilterModal = ({
 }) => {
   if (!isOpen) return null;
   const [selectDate, setSelectDate] = useState(new DateObject());
-  const navigate = useNavigate();
-  const [searchParams,setSearchParams] = useSearchParams();
 
   const handleSetTime = () => {
     selectDate.toString();
@@ -96,10 +94,7 @@ const TimeFilterModal = ({
     //   .convert(gregorian, gregorian_en)
     //   .format("YYYY-MM-DDT");
     const time = selectDate.convert(persian, persian_fa).format("YYYY/MM/DD");
-    const filter = searchParams.get("time");
-    handleFilterChange("time", time);
-    // setSearchParams({time});
-    // navigate(`?time=${time}`);
+    handleFilterChange("date", selectDate.convert(gregorian, gregorian_en).format("YYYY-MM-DD"));
     onClose();
   };
   return (
@@ -129,7 +124,7 @@ const TimeFilterModal = ({
 const WhereFilterModal = ({
   isOpen,
   onClose,
-  handleFilterChange
+  handleFilterChange,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -159,17 +154,16 @@ const WhereFilterModal = ({
 const TypeFilterModal = ({
   isOpen,
   onClose,
-  handleFilterChange
+  handleFilterChange,
 }: {
   isOpen: boolean;
   onClose: () => void;
   handleFilterChange: (key: string, value: string) => void;
 }) => {
   if (!isOpen) return null;
-    const handleSetType = (type: string) => {
-    handleFilterChange("type", type);
+  const handleSetType = (type: string) => {
+    handleFilterChange("games", type);
     onClose();
-  
   };
   return (
     <BottomSheet

@@ -23,7 +23,7 @@ export const Dashboard = () => {
   ];
   const navigate = useNavigate();
   return (
-    <chakra.div overflow="auto" h={"90vh"}>
+    <chakra.div overflow="auto" h={"dvh"}>
       {/* <InfiniteScroll
   dataLength={items.length} //This is important field to render the next data
   next={fetchData}

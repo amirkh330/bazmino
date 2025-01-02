@@ -13,9 +13,10 @@ import {
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import React from "react";
 import { useEvents } from "./Events.biz";
+import { Loading } from "@/components/CoreComponnets/Loading/Loading";
 
 export const Events = () => {
-  const { eventList } = useEvents();
+  const { eventList, loading } = useEvents();
   return (
     <div>
       <InputGroup
@@ -30,7 +31,7 @@ export const Events = () => {
         borderRadius={"8px"}
         borderColor="gray.400"
       >
-        <InputRightElement pointerEvents="none" >
+        <InputRightElement pointerEvents="none">
           <Icon>
             <MagnifyingGlass size={24} />
           </Icon>
@@ -62,12 +63,16 @@ export const Events = () => {
         />
       </InputGroup>
       <FilterSecession />
-      <Box h="58vh" overflowY="auto">
-        <Grid templateColumns="repeat(2, 1fr)">
-          {eventList.map((event) => {
-            return <EventCard event={event} />;
-          })}
-        </Grid>
+      <Box h="58dvh" overflowY="auto">
+        {loading ? (
+          <Loading />
+        ) : (
+          <Grid templateColumns="repeat(2, 1fr)">
+            {eventList.map((event) => {
+              return <EventCard event={event} />;
+            })}
+          </Grid>
+        )}
       </Box>
     </div>
   );

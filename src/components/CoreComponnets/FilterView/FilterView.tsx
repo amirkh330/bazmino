@@ -1,17 +1,33 @@
 import { CloseButton, Flex, Tag } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { DateObject } from "react-multi-date-picker";
 import { useSearchParams } from "react-router-dom";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 export const FilterView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const list = Array.from(searchParams.entries()).map(([key, value]) => {
-    return { key, value };
+    return { type: key, value }; // Assuming the key represents the type
   });
 
   const removeFilter = (key: string) => {
     searchParams.delete(key);
     setSearchParams(searchParams);
+  };
+
+  const renderItem = (item: { type: string; value: string }) => {
+    switch (item.type) {
+      case "date":
+        return new DateObject(item.value)
+          .convert(persian, persian_fa)
+          .toString();
+      case "games":
+        return item.value == "mafia" ? "مافیا" : "گل یا پوچ";
+      default:
+        return item.value;
+    }
   };
 
   return (
@@ -20,6 +36,7 @@ export const FilterView = () => {
         if (!item) return null;
         return (
           <Tag
+            key={item.type}
             borderRadius={"6px"}
             gap="8px"
             py="1"
@@ -29,10 +46,10 @@ export const FilterView = () => {
             color={"amir.mainBg"}
             fontSize={"16px"}
           >
-            {item.value}
+            {renderItem(item)}
             <CloseButton
               fontSize="10px"
-              onClick={() => removeFilter(item.key)}
+              onClick={() => removeFilter(item.type)}
             />
           </Tag>
         );

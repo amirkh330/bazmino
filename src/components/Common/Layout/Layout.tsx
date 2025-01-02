@@ -11,7 +11,7 @@ export const Layout = () => {
     });
   }, []);
   return (
-    <Box maxWidth="400px" width="100%" bg="amir.mainBg" height="100vh">
+    <Box maxWidth="400px" width="100%" bg="amir.mainBg" height="dvh">
       <Header />
       <Box mx="auto" p="4" height="85vh">
         <Outlet />

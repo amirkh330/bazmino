@@ -9,23 +9,33 @@ import gregorian_en from "react-date-object/locales/gregorian_en";
 export const useEvents = () => {
   const [eventList, setEventList] = useState<IEventItem[]>([]);
   const [total, setTotal] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [searchParams] = useSearchParams(); // خواندن پارامترها از URL
+  const queryTime = searchParams.get("date");
+  const time = new DateObject(queryTime!)
+    .convert(gregorian, gregorian_en)
+    .format("YYYY-MM-DD");
+
+  const queryType = searchParams.get("games");
+
+  const params = new URLSearchParams({
+    page: "1",
+    pageSize: "6",
+    ...(queryTime && { date: time }),
+    ...(queryType && { games: queryType }),
+  });
+
   useEffect(() => {
-    const queryTime = searchParams.get("time");
-    const time = new DateObject(queryTime!)
-      .convert(gregorian, gregorian_en)
-      .format("YYYY-MM-DDT");
-    const queryType = searchParams.get("type");
+    setLoading(true);
+    CallApi.get(`${import.meta.env.VITE_APP_BASE_URL}/events/_filter?${params}`)
+      .then(({ data }) => {
+        setEventList(data.items);
+        setTotal(data.total);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [queryType, time]);
 
-    CallApi.get(
-      `${
-        import.meta.env.VITE_APP_BASE_URL
-      }/events/_filter?page=${1}&pageSize=6&time=${time}&type=${queryType}`
-    ).then(({ data }) => {
-      setEventList(data.items);
-      setTotal(data.total);
-    });
-  }, []);
-
-  return { eventList };
+  return { eventList, loading };
 };
