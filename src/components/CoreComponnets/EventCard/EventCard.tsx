@@ -1,13 +1,16 @@
 import { IEventItem } from "@/types/responses/ResponsesTypes";
+import { IsShowDiscount } from "@/utils/IsShowDiscount/IsShowDiscount";
 import { Toman } from "@/utils/Toman/Toman";
 import { Box, Card, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { Calendar } from "@phosphor-icons/react";
 import { Coffee, Users } from "@phosphor-icons/react/dist/ssr";
-export const EventCard = ({ event }: { event: IEventItem }) => {
-  const isShowDiscount = event.basePrice !== event.finalPrice;
+import { Link } from "react-router-dom";
 
+export const EventCard = ({ event }: { event: IEventItem }) => {
   return (
     <Card
+      as={Link}
+      to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
       bg="amir.secondaryBg"
       color="amir.common"
       borderRadius="4px"
@@ -65,7 +68,7 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
           </Flex>
         </Flex>
         <Flex mx="0" alignItems={"center"} gap="1">
-          {isShowDiscount ? (
+          {IsShowDiscount(event) ? (
             <Text
               fontSize={"10px"}
               color="#FC8181"

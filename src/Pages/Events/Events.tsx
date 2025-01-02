@@ -1,24 +1,23 @@
+import { Footer } from "@/components/Common/Footer/Footer";
 import { EventCard } from "@/components/CoreComponnets/EventCard/EventCard";
 import { FilterSecession } from "@/components/CoreComponnets/FilterSecession/FilterSecession";
+import { Loading } from "@/components/CoreComponnets/Loading/Loading";
 import {
   Box,
-  Flex,
+  chakra,
   Grid,
   Icon,
   Input,
   InputGroup,
-  InputLeftElement,
-  InputRightElement,
+  InputRightElement
 } from "@chakra-ui/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import React from "react";
 import { useEvents } from "./Events.biz";
-import { Loading } from "@/components/CoreComponnets/Loading/Loading";
 
 export const Events = () => {
   const { eventList, loading } = useEvents();
   return (
-    <div>
+    <chakra.div p="4">
       <InputGroup
         w="70%"
         m="0"
@@ -74,6 +73,7 @@ export const Events = () => {
           </Grid>
         )}
       </Box>
-    </div>
+      <Footer />
+    </chakra.div>
   );
 };

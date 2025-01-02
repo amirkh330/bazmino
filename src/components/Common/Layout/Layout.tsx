@@ -7,16 +7,15 @@ import { Footer } from "../Footer/Footer";
 
 export const Layout = () => {
   useEffect(() => {
-    CallApi.get(`${import.meta.env.VITE_APP_BASE_URL}/me`).then((res) => {
+    CallApi.get(`/me`).then((res) => {
     });
   }, []);
   return (
-    <Box maxWidth="400px" width="100%" bg="amir.mainBg" height="dvh">
+    <Box maxWidth="400px" width="100%" bg="amir.mainBg" height="100dvh">
       <Header />
-      <Box mx="auto" p="4" height="85vh">
+      <Box mx="auto" height="85vh">
         <Outlet />
       </Box>
-      <Footer />
     </Box>
   );
 };

@@ -27,15 +27,14 @@ export const useEvents = () => {
 
   useEffect(() => {
     setLoading(true);
-    CallApi.get(`${import.meta.env.VITE_APP_BASE_URL}/events/_filter?${params}`)
-      .then(({ data }) => {
-        setEventList(data.items);
-        setTotal(data.total);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    CallApi.get(`/events/_filter?${params}`)
+    .then(({ data }) => {
+      setEventList(data.items);
+      setTotal(data.total);
+    }).finally(() => {
+      setLoading(false);
+    });
   }, [queryType, time]);
 
-  return { eventList, loading };
+  return { eventList ,loading};
 };
