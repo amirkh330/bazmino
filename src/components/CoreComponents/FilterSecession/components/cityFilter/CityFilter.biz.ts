@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 
 export const useCityFilter = () => {
   const [whereFilterVisible, setWhereFilterVisible] = useState(false);
-  const [districts, setDistricts] = useState([]);
+  // const [districts, setDistricts] = useState([]);
 
-  useEffect(() => {
-    CallApi.get("districts/_search").then(({ data }) => {
-      setDistricts(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   CallApi.get("districts/_search").then(({ data }) => {
+  //     setDistricts(data);
+  //   });
+  // }, []);
 
-  return { whereFilterVisible, setWhereFilterVisible, districts };
+  return { whereFilterVisible, setWhereFilterVisible,  };
 };

@@ -30,6 +30,7 @@ export const FilterSecession = () => {
     whereFilterVisible,
     setWhereFilterVisible,
     typeFilterVisible,
+    districtsList,
     setTypeFilterVisible,
     handleFilterChange,
   } = useFilterSecession();
@@ -43,9 +44,9 @@ export const FilterSecession = () => {
         <Box {...boxStyles} onClick={() => setTimeFilterVisible(true)}>
           <Text fontSize={"16px"}>کِی بریم؟</Text>
         </Box>
-        <CityFilter handleFilterChange={handleFilterChange} />
+        <CityFilter handleFilterChange={handleFilterChange} districtsList={districtsList} />
       </Flex>
-      <FilterView />
+      <FilterView districtsList={districtsList}/>
       <TimeFilterModal
         isOpen={timeFilterVisible}
         onClose={() => setTimeFilterVisible(false)}

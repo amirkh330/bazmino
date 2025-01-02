@@ -5,7 +5,8 @@ import { useSearchParams } from "react-router-dom";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 
-export const FilterView = () => {
+export const FilterView = ({ districtsList }: any) => {
+  console.log('districtsList:', districtsList)
   const [searchParams, setSearchParams] = useSearchParams();
 
   const list = Array.from(searchParams.entries()).map(([key, value]) => {
@@ -18,6 +19,7 @@ export const FilterView = () => {
   };
 
   const renderItem = (item: { type: string; value: string }) => {
+   
     switch (item.type) {
       case "date":
         return new DateObject(item.value)
@@ -25,8 +27,11 @@ export const FilterView = () => {
           .toString();
       case "games":
         return item.value == "mafia" ? "مافیا" : "گل یا پوچ";
+
       default:
-        return item.value;
+        return districtsList?.find((district: any) => district.id == item.value)?.title
+      // return districtsList?.find((district: any) => district._id == item.value)
+      //   .title;
     }
   };
 
