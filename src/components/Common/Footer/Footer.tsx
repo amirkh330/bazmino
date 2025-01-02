@@ -16,6 +16,7 @@ export const Footer = () => {
     <Flex
       bg="amir.secondaryBg"
       p={4}
+      w="full"
       zIndex={10}
       justifyContent="space-between"
       alignItems="center"

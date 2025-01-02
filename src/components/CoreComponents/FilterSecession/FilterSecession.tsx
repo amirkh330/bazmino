@@ -35,7 +35,7 @@ export const FilterSecession = () => {
   } = useFilterSecession();
 
   return (
-    <Box my="1" p="4">
+    <Box my="1">
       <Flex gap="8" alignItems={"center"} my="4">
         <Box {...boxStyles} onClick={() => setTypeFilterVisible(true)}>
           <Text fontSize={"16px"}>چی بازی؟</Text>

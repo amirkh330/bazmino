@@ -1,7 +1,8 @@
 import { Footer } from "@/components/Common/Footer/Footer";
-import { EventCard } from "@/components/CoreComponnets/EventCard/EventCard";
-import { FilterSecession } from "@/components/CoreComponnets/FilterSecession/FilterSecession";
-import { Loading } from "@/components/CoreComponnets/Loading/Loading";
+import { EventCard } from "@/components/CoreComponents/EventCard/EventCard";
+import { FilterSecession } from "@/components/CoreComponents/FilterSecession/FilterSecession";
+import InfinityScroll from "@/components/CoreComponents/InfiniteScroll/InfiniteScroll";
+import { IEventItem } from "@/types/responses/ResponsesTypes";
 import {
   Box,
   chakra,
@@ -13,18 +14,25 @@ import {
 } from "@chakra-ui/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useEvents } from "./Events.biz";
+import { Loading } from "@/components/CoreComponents/Loading/Loading";
 
 export const Events = () => {
-  const { eventList, loading } = useEvents();
+  const { eventList, loading, total, setPage, page } = useEvents();
   return (
-    <chakra.div>
+    <chakra.div
+      pt="4"
+      h="calc(100dvh - 56px)"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+    >
       <chakra.div px={4}>
         <InputGroup
           w="70%"
           m="0"
           bg="transparent"
           width="full"
-          my="12px"
+          // my="12px"
           color="amir.common"
           alignItems="center"
           border="1px"
@@ -62,19 +70,27 @@ export const Events = () => {
             }}
           />
         </InputGroup>
+
+        <FilterSecession />
+        <Box h="60dvh" overflowY="auto">
+          {loading && !eventList.length ? (
+            <Loading />
+          ) : (
+            <InfinityScroll
+              items={eventList}
+              total={total!}
+              loadMore={() => {
+                console.log(page);
+
+                setPage((_prevPage) => _prevPage + 1);
+              }}
+              renderItem={(item: IEventItem, index: number) => {
+                return <EventCard event={item} />;
+              }}
+            />
+          )}
+        </Box>
       </chakra.div>
-      <FilterSecession />
-      <Box h="58dvh" overflowY="auto" p="4">
-        {loading ? (
-          <Loading />
-        ) : (
-          <Grid templateColumns="repeat(2, 1fr)">
-            {eventList.map((event) => {
-              return <EventCard event={event} />;
-            })}
-          </Grid>
-        )}
-      </Box>
       <Footer />
     </chakra.div>
   );

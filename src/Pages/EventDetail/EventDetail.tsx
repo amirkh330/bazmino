@@ -1,4 +1,4 @@
-import { Loading } from "@/components/CoreComponnets/Loading/Loading";
+import { Loading } from "@/components/CoreComponents/Loading/Loading";
 import { CallApi } from "@/settings/axiosConfig";
 import { IsShowDiscount } from "@/utils/IsShowDiscount/IsShowDiscount";
 import { Toman } from "@/utils/Toman/Toman";
@@ -29,7 +29,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEventDetail } from "./EventDetail.biz";
 import { Characters } from "./Components/Characters/Characters";
-import Map from "@/components/CoreComponnets/Map/Map";
+import Map from "@/components/CoreComponents/Map/Map";
 
 export const EventDetail = () => {
   const { id } = useParams();
@@ -75,7 +75,7 @@ export const EventDetail = () => {
         <chakra.div
           display={"flex"}
           mx="0"
-          h="calc(100dvh - 56px)"
+          // h="calc(100dvh - 56px)"
           flexDirection="column"
           justifyContent="space-between"
         >

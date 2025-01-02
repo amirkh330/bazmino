@@ -1,4 +1,4 @@
-import BottomSheet from "@/components/CoreComponnets/BottomSheet/BottomSheet";
+import BottomSheet from "@/components/CoreComponents/BottomSheet/BottomSheet";
 import { Box, Checkbox, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { useCityFilter } from "./CityFilter.biz";

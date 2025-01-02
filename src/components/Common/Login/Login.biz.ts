@@ -1,4 +1,4 @@
-import BottomSheet from "@/components/CoreComponnets/BottomSheet/BottomSheet";
+import BottomSheet from "@/components/CoreComponents/BottomSheet/BottomSheet";
 import { Box, Button, Input, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";

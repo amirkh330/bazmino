@@ -8,6 +8,7 @@ import gregorian_en from "react-date-object/locales/gregorian_en";
 
 export const useEvents = () => {
   const [eventList, setEventList] = useState<IEventItem[]>([]);
+  const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
   const [searchParams] = useSearchParams(); // خواندن پارامترها از URL
@@ -19,8 +20,8 @@ export const useEvents = () => {
   const queryType = searchParams.get("games");
 
   const params = new URLSearchParams({
-    page: "1",
-    pageSize: "6",
+    page: String(page),
+    pageSize: "4",
     ...(queryTime && { date: time }),
     ...(queryType && { games: queryType }),
   });
@@ -28,13 +29,19 @@ export const useEvents = () => {
   useEffect(() => {
     setLoading(true);
     CallApi.get(`/events/_filter?${params}`)
-    .then(({ data }) => {
-      setEventList(data.items);
-      setTotal(data.total);
-    }).finally(() => {
-      setLoading(false);
-    });
-  }, [queryType, time]);
+      .then(({ data }) => {
+        page === 1
+          ? setEventList(data.items)
+          : setEventList((prev) => [...prev, ...data.items]);
 
-  return { eventList ,loading};
+        setTotal(data.total);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [queryType, time, page]);
+
+  console.log(page);
+
+  return { eventList, loading, total, setPage, page };
 };
