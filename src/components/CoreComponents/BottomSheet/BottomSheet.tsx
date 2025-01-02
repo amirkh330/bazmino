@@ -11,9 +11,9 @@ const BottomSheet = ({ title, children, isOpen, onClose }: IBottomSheet) => {
   if (!isOpen) return null;
   return (
     <>
-      <Box textAlign="center" p="6" maxW={"400px"}>
-        <Slide direction="bottom" in={isOpen} style={{ zIndex: 20 }}>
-          <Box bg={"amir.mainBg"} boxShadow="md" borderTopRadius="md">
+      <Box textAlign="center" p="6" maxW={"400px"} >
+        <Slide direction="bottom" in={isOpen} style={{ zIndex: 20 }} >
+          <Box bg={"amir.mainBg"} boxShadow="md" borderTopRadius="md" >
             <Flex
               p="6"
               justifyContent="space-between"
@@ -26,7 +26,7 @@ const BottomSheet = ({ title, children, isOpen, onClose }: IBottomSheet) => {
               </Text>
               <CloseButton onClick={onClose} color={"amir.common"} />
             </Flex>
-            <Box>{children}</Box>
+            <Box >{children}</Box>
           </Box>
         </Slide>
       </Box>

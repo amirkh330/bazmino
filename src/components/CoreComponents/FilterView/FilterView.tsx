@@ -31,7 +31,7 @@ export const FilterView = () => {
   };
 
   return (
-    <Flex my="2" justifyContent={"flex-start"} gap={2}>
+    <Flex my="2" justifyContent={"flex-start"} gap={2} overflowX={"auto"}>
       {list.map((item) => {
         if (!item) return null;
         return (

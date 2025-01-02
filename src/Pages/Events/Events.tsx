@@ -24,9 +24,11 @@ export const Events = () => {
       h="calc(100dvh - 56px)"
       display="flex"
       flexDirection="column"
+      m="0"
       justifyContent="space-between"
     >
-      <chakra.div px={4}>
+      <chakra.div px={4} m="0"
+      >
         <InputGroup
           w="70%"
           m="0"
@@ -72,7 +74,7 @@ export const Events = () => {
         </InputGroup>
 
         <FilterSecession />
-        <Box h="60dvh" overflowY="auto">
+        <Box h="60dvh" overflowY="auto" w={"full"}>
           {loading && !eventList.length ? (
             <Loading />
           ) : (
@@ -80,8 +82,6 @@ export const Events = () => {
               items={eventList}
               total={total!}
               loadMore={() => {
-                console.log(page);
-
                 setPage((_prevPage) => _prevPage + 1);
               }}
               renderItem={(item: IEventItem, index: number) => {

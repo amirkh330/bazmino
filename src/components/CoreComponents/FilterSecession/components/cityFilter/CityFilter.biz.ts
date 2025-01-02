@@ -6,10 +6,10 @@ export const useCityFilter = () => {
   const [districts, setDistricts] = useState([]);
 
   useEffect(() => {
-    CallApi.get("districts").then(({ data }) => {
-      console.log(data);
+    CallApi.get("districts/_search").then(({ data }) => {
+      setDistricts(data);
     });
   }, []);
 
-  return { whereFilterVisible, setWhereFilterVisible };
+  return { whereFilterVisible, setWhereFilterVisible, districts };
 };

@@ -41,7 +41,5 @@ export const useEvents = () => {
       });
   }, [queryType, time, page]);
 
-  console.log(page);
-
   return { eventList, loading, total, setPage, page };
 };

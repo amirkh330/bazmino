@@ -33,7 +33,6 @@ import Map from "@/components/CoreComponents/Map/Map";
 
 export const EventDetail = () => {
   const { id } = useParams();
-  console.log("id:", id);
   const navigate = useNavigate();
   const [ticketCount, setTicketCount] = useState(1);
   const [phoneNumbers, setPhoneNumbers] = useState<any>([]);

@@ -29,16 +29,14 @@ export const useEventDetail = () => {
           title: eventItem?.title,
           url: window.location.href,
         });
-        console.log("اشتراک‌گذاری موفقیت‌آمیز بود!");
-      } catch (error) {
-        console.error("خطا در اشتراک‌گذاری:", error);
-      }
+      } catch (error) {}
     } else {
       const currentUrl = window.location.href;
       navigator.clipboard.writeText(currentUrl).then(() => {
         toast({
           title: "آدرس بازی با موفقیت کپی شد!",
           status: "success",
+          position: "top",
         });
       });
     }
