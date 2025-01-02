@@ -21,6 +21,7 @@ import gregorian_en from "react-date-object/locales/gregorian_en";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { FilterView } from "../FilterView/FilterView";
+import { CityFilter } from "./components/cityFilter/CityFilter";
 
 export const FilterSecession = () => {
   const {
@@ -34,7 +35,7 @@ export const FilterSecession = () => {
   } = useFilterSecession();
 
   return (
-    <Box my="1">
+    <Box my="1" p="4">
       <Flex gap="8" alignItems={"center"} my="4">
         <Box {...boxStyles} onClick={() => setTypeFilterVisible(true)}>
           <Text fontSize={"16px"}>چی بازی؟</Text>
@@ -42,9 +43,7 @@ export const FilterSecession = () => {
         <Box {...boxStyles} onClick={() => setTimeFilterVisible(true)}>
           <Text fontSize={"16px"}>کِی بریم؟</Text>
         </Box>
-        <Box {...boxStyles} onClick={() => setWhereFilterVisible(true)}>
-          <Text fontSize={"16px"}>کجا بریم؟</Text>
-        </Box>
+        <CityFilter handleFilterChange={handleFilterChange} />
       </Flex>
       <FilterView />
       <TimeFilterModal
@@ -55,11 +54,6 @@ export const FilterSecession = () => {
       <TypeFilterModal
         isOpen={typeFilterVisible}
         onClose={() => setTypeFilterVisible(false)}
-        handleFilterChange={handleFilterChange}
-      />
-      <WhereFilterModal
-        isOpen={whereFilterVisible}
-        onClose={() => setWhereFilterVisible(false)}
         handleFilterChange={handleFilterChange}
       />
     </Box>
@@ -94,7 +88,10 @@ const TimeFilterModal = ({
     //   .convert(gregorian, gregorian_en)
     //   .format("YYYY-MM-DDT");
     const time = selectDate.convert(persian, persian_fa).format("YYYY/MM/DD");
-    handleFilterChange("date", selectDate.convert(gregorian, gregorian_en).format("YYYY-MM-DD"));
+    handleFilterChange(
+      "date",
+      selectDate.convert(gregorian, gregorian_en).format("YYYY-MM-DD")
+    );
     onClose();
   };
   return (
@@ -116,36 +113,6 @@ const TimeFilterModal = ({
         >
           تائید تاریخ بازی
         </Button>
-      </Box>
-    </BottomSheet>
-  );
-};
-
-const WhereFilterModal = ({
-  isOpen,
-  onClose,
-  handleFilterChange,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  handleFilterChange: (key: string, value: string) => void;
-}) => {
-  if (!isOpen) return null;
-  return (
-    <BottomSheet
-      title={"کجا بازی کنیم؟"}
-      isOpen={isOpen}
-      onOpen={() => {}}
-      onClose={onClose}
-    >
-      <Box p="4">
-        <Flex alignItems={"center"} gap="2" justifyContent={"flex-start"}>
-          <Checkbox color="amir.primary">
-            <Text color="amir.common" fontSize={"16px"}>
-              ری
-            </Text>
-          </Checkbox>
-        </Flex>
       </Box>
     </BottomSheet>
   );
