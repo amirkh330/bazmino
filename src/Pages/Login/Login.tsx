@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login2 = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -103,4 +103,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login2;

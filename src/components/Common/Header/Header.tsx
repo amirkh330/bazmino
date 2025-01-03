@@ -20,11 +20,11 @@ export const Header = () => {
       </Flex>
 
       {isAuth ? (
-        "توشه"
-      ) : (
         <Box onClick={onOpen} m={0}>
           <User size={24} />
         </Box>
+      ) : (
+          "ورود"
       )}
       <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
     </Flex>

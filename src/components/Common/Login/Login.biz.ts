@@ -3,13 +3,13 @@ import { Box, Button, Input, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useAuthStore from "@/store/authStore";
+import { phoneRegex } from "@/utils/Regex/Regex";
 
 interface ILogin {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
-const phoneRegex = /^09\d{9}$/;
 export const useLogin = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");

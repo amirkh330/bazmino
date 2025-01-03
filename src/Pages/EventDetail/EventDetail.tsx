@@ -30,6 +30,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEventDetail } from "./EventDetail.biz";
 import { Characters } from "./Components/Characters/Characters";
 import Map from "@/components/CoreComponents/Map/Map";
+import { FooterByPrice } from "./Components/FooterByPrice/FooterByPrice";
 
 export const EventDetail = () => {
   const { id } = useParams();
@@ -81,7 +82,7 @@ export const EventDetail = () => {
           <chakra.div
             mx="0"
             display={"flex"}
-            h="85dvh"
+            h="calc(100dvh - 114px)"
             overflow={"auto"}
             flexDirection="column"
             justifyContent="space-between"
@@ -289,108 +290,9 @@ export const EventDetail = () => {
               </AccordionItem>
             </Accordion>
           </chakra.div>
-
-          <Flex
-            bg="amir.secondaryBg"
-            py={2}
-            px={4}
-            mx="0"
-            zIndex={10}
-            justifyContent="space-center"
-            alignItems="center"
-            gap={2}
-            // borderRadius={" 16px 16px 0 0"}
-          >
-            <Button
-              w="50%"
-              borderRadius="6px"
-              bgColor="amir.primary"
-              color="amir.secondaryBg"
-            >
-              رزرو بازی
-            </Button>
-            <Box>
-              <Text color={"amir.common"} fontSize={"12px"}>
-                برای هر نفر
-              </Text>
-              <Flex alignItems="center" gap={"2"}>
-                {IsShowDiscount({
-                  basePrice: eventItem?.basePrice!,
-                  finalPrice: eventItem?.finalPrice!,
-                }) ? (
-                  <Text
-                    fontSize={"12px"}
-                    color="#FC8181"
-                    textDecoration="line-through"
-                  >
-                    {/* {Toman(eventItem?.basePrice!)} */}
-                  </Text>
-                ) : null}
-                <Text fontSize={"16px"} fontWeight={500} color="amir.common">
-                  {Toman(eventItem?.finalPrice!)}
-                </Text>
-              </Flex>
-            </Box>
-          </Flex>
+          <FooterByPrice eventItem={eventItem!} />
         </chakra.div>
       )}
     </>
-    // <chakra.div
-    //   display={"flex"}
-    //   h="90vh"
-    //   flexDirection="column"
-    //   justifyContent="space-between"
-    // >
-    //   <Box p="4">
-    //     <VStack spacing="4">
-    //       <Text fontSize="2xl" fontWeight="bold">
-    //         خرید بلیط / {id}
-    //       </Text>
-
-    //       <HStack spacing="4">
-    //         <Button
-    //           size={"xs"}
-    //           onClick={() => handleTicketCountChange(ticketCount - 1)}
-    //           leftIcon={<Minus />}
-    //           disabled={ticketCount <= 1}
-    //         ></Button>
-
-    //         <NumberInput
-    //           size={"xs"}
-    //           value={ticketCount}
-    //           onChange={(valueString) =>
-    //             handleTicketCountChange(Number(valueString))
-    //           }
-    //           min={1}
-    //           max={100}
-    //           width="120px"
-    //         >
-    //           <NumberInputField />
-    //         </NumberInput>
-
-    //         <Button
-    //           size={"xs"}
-    //           onClick={() => handleTicketCountChange(ticketCount + 1)}
-    //           rightIcon={<Plus />}
-    //         ></Button>
-    //       </HStack>
-
-    //       {Array.from({ length: ticketCount }).map((_, index) => (
-    //         <Box key={index} width="100%">
-    //           <Text>شماره تلفن بلیط {index + 1}</Text>
-    //           <Input
-    //             type="tel"
-    //             value={phoneNumbers[index]}
-    //             onChange={(e) => handlePhoneNumberChange(index, e.target.value)}
-    //             placeholder="شماره تلفن"
-    //           />
-    //         </Box>
-    //       ))}
-    //     </VStack>
-    //   </Box>
-    //   <Button colorScheme="blue" width="100%" onClick={handleReserve}>
-    //     ثبت نام
-    //   </Button>
-    // </chakra.div>
   );
 };
