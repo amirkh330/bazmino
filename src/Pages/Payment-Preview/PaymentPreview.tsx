@@ -75,7 +75,7 @@ export const PaymentPreview = () => {
             borderRadius="8px"
             border="1px solid"
             borderColor={"amir.primary"}
-            background="#414141"
+            background="amir.secondaryBg"
             px="16px"
             py="16px"
             mx="0"

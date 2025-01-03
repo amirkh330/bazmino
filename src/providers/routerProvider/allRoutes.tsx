@@ -7,8 +7,16 @@ import { Events } from "@/Pages/Events/Events";
 import { RouteObject } from "react-router-dom";
 import { PaymentCallBack } from "@/Pages/PaymentCallBack/PaymentCallBack";
 import { MyTickets } from "@/Pages/MyTickets/MyTickets";
+import { Profile } from "@/Pages/Profile/Profile";
+import { Wallet } from "@/Pages/Wallet/Wallet";
+import { EditProfile } from "@/Pages/EditProfile/EditProfile";
+import { Transactions } from "@/Pages/Transactions/Transactions";
 
 export const allRoutes: Array<RouteObject> = [
+  { path: "/profile", element: <Profile /> },
+  { path: "/profile/transactions", element: <Transactions /> },
+  { path: "/profile/wallet", element: <Wallet /> },
+  { path: "/profile/edit", element: <EditProfile /> },
   { path: "/events", element: <Events /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId", element: <EventDetail /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId/reserve", element: <EventReserve /> },
