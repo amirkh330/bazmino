@@ -111,16 +111,16 @@ const PhoneNumberStep = ({
   );
 };
 
-const OtpStep = ({ otp, setOtp, handleSendOtp ,loading}: any) => {
+const OtpStep = ({ otp, setOtp, handleSendOtp, loading }: any) => {
   return (
     <Box mx="auto" p="4">
-      <Text>کد ارسال شده را وارد کنید</Text>
+      <Text color={"amir.common"}>کد ارسال شده را وارد کنید</Text>
       <HStack my="6" justifyContent={"space-around"} mx="8" dir="ltr">
         <PinInput value={otp} onChange={setOtp}>
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
+          <PinInputField color={"amir.common"} />
+          <PinInputField color={"amir.common"} />
+          <PinInputField color={"amir.common"} />
+          <PinInputField color={"amir.common"} />
         </PinInput>
       </HStack>
       <Button
