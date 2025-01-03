@@ -9,8 +9,8 @@ export const Footer = () => {
   const isActive = (url: string) => pathname !== url;
   const list = [
     { icon: <PuzzlePiece size="20" />, text: "بازی", url: "/events" },
-    { icon: <Coffee size="20" />, text: "کافه", url: "/" },
-    { icon: <Ticket size="20" />, text: "رزروهای من", url: "/reserves" },
+    { icon: <Coffee size="20" />, text: "کافه", url: "/coffees" },
+    { icon: <Ticket size="20" />, text: "رزروهای من", url: "/my-tickets" },
   ];
   return (
     <Flex

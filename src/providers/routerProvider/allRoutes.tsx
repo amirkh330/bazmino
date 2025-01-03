@@ -6,12 +6,14 @@ import { EventDetail } from "@/Pages/EventDetail/EventDetail";
 import { Events } from "@/Pages/Events/Events";
 import { RouteObject } from "react-router-dom";
 import { PaymentCallBack } from "@/Pages/PaymentCallBack/PaymentCallBack";
+import { MyTickets } from "@/Pages/MyTickets/MyTickets";
 
 export const allRoutes: Array<RouteObject> = [
   { path: "/events", element: <Events /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId", element: <EventDetail /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId/reserve", element: <EventReserve /> },
-  { path: "/", element: <CoffeesShops /> },
+  { path: "/coffees", element: <CoffeesShops /> },
+  { path: "/my-tickets", element: <MyTickets /> },
   { path: "/event-detail/:id", element: <EventDetail /> },
   { path: "/payment-preview/:id", element: <PaymentPreview /> },
   { path: "/payment/callback", element: <PaymentCallBack /> },
