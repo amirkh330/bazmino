@@ -1,7 +1,5 @@
 import { Loading } from "@/components/CoreComponents/Loading/Loading";
-import { CallApi } from "@/settings/axiosConfig";
-import { IsShowDiscount } from "@/utils/IsShowDiscount/IsShowDiscount";
-import { Toman } from "@/utils/Toman/Toman";
+import Map from "@/components/CoreComponents/Map/Map";
 import {
   Accordion,
   AccordionButton,
@@ -10,13 +8,12 @@ import {
   AccordionPanel,
   Avatar,
   Box,
-  Button,
   Divider,
   Flex,
   Icon,
   Image,
   Text,
-  chakra,
+  chakra
 } from "@chakra-ui/react";
 import {
   Calendar,
@@ -25,47 +22,11 @@ import {
   ShareNetwork,
   Users,
 } from "@phosphor-icons/react";
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEventDetail } from "./EventDetail.biz";
 import { Characters } from "./Components/Characters/Characters";
-import Map from "@/components/CoreComponents/Map/Map";
 import { FooterByPrice } from "./Components/FooterByPrice/FooterByPrice";
+import { useEventDetail } from "./EventDetail.biz";
 
 export const EventDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [ticketCount, setTicketCount] = useState(1);
-  const [phoneNumbers, setPhoneNumbers] = useState<any>([]);
-
-  const handleTicketCountChange = (value: any) => {
-    const newCount = Math.max(value, 1); // Ensure at least 1 ticket
-    setTicketCount(newCount);
-
-    // Update phone numbers array to match the new ticket count
-    if (newCount > phoneNumbers.length) {
-      setPhoneNumbers([...phoneNumbers, ""]);
-    } else {
-      setPhoneNumbers(phoneNumbers.slice(0, newCount));
-    }
-  };
-
-  const handlePhoneNumberChange = (index: any, value: any) => {
-    const updatedPhoneNumbers = [...phoneNumbers];
-    updatedPhoneNumbers[index] = value;
-    setPhoneNumbers(updatedPhoneNumbers);
-  };
-
-  const handleReserve = () => {
-    CallApi.post("/eventItems/1005/orders", { phoneNumbers: [...phoneNumbers] })
-      .then(() => {
-        navigate("/checkout/1005");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const { loading, eventItem, handleShare } = useEventDetail();
   return (
     <>

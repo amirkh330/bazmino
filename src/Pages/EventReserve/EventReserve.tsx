@@ -24,7 +24,7 @@ export const EventReserve = () => {
     btnLoading,
   } = useEventReserve();
   return (
-    <chakra.div px="4" >
+    <chakra.div px="4">
       <chakra.div pt="6">
         <Text fontSize="14px" color={"amir.common"}>
           پس از رزرو بازی، برای هر نفر یک بارکد اختصاصی ارسال می‌شود که در هنگام
@@ -43,22 +43,20 @@ export const EventReserve = () => {
                 <Text fontSize="14px" color={"amir.common"}>
                   شماره موبایل نفر {index + 1}
                 </Text>
-                {index && (
-                  <Button
-                    p="0"
-                    w="63px"
-                    h="24px"
-                    gap="6px"
-                    fontSize="12px"
-                    borderRadius="6px"
-                    colorScheme="red"
-                    backgroundColor="red.800"
-                    onClick={() => handleDeletePhoneNumber(index)}
-                  >
-                    <Icon as={Minus} mx="0" />
-                    حذف
-                  </Button>
-                )}
+                <Button
+                  p="0"
+                  w="63px"
+                  h="24px"
+                  gap="6px"
+                  fontSize="12px"
+                  borderRadius="6px"
+                  colorScheme="red"
+                  backgroundColor="red.800"
+                  onClick={() => handleDeletePhoneNumber(index)}
+                >
+                  <Icon as={Minus} mx="0" />
+                  حذف
+                </Button>
               </Flex>
 
               <Input
@@ -112,6 +110,7 @@ export const EventReserve = () => {
         color="amir.secondaryBg"
         onClick={handleSubmit}
         isLoading={btnLoading}
+        isDisabled={!phoneNumberList.length}
       >
         تائید و ادامه
       </Button>

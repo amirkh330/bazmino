@@ -9,7 +9,9 @@ export const useEventDetail = () => {
   const { timeId, eventId, dateId } = useParams();
   const [loading, setLoading] = useState<boolean>(false);
   const [eventItem, setEventItem] = useState<IEventDetail>();
-
+  // const eventId =1001
+  // const dateId =1018
+  // const timeId=1019
   useEffect(() => {
     setLoading(true);
     CallApi.get(`events/${eventId}/dates/${dateId}/times/${timeId}`)
