@@ -1,12 +1,12 @@
 import { persianToEnglishNumbers } from "@/utils/convertNumber/ConvertNumber";
 import {
-    Button,
-    chakra,
-    Divider,
-    Flex,
-    Icon,
-    Input,
-    Text
+  Button,
+  chakra,
+  Divider,
+  Flex,
+  Icon,
+  Input,
+  Text,
 } from "@chakra-ui/react";
 import { Minus, Plus } from "@phosphor-icons/react/dist/ssr";
 import { useEventReserve } from "./EventReserve.biz";
@@ -20,10 +20,11 @@ export const EventReserve = () => {
     handleAddPhoneNumber,
     errMsg,
     setErrMsg,
-    handleSubmit
+    handleSubmit,
+    btnLoading,
   } = useEventReserve();
   return (
-    <chakra.div px="4">
+    <chakra.div px="4" >
       <chakra.div pt="6">
         <Text fontSize="14px" color={"amir.common"}>
           پس از رزرو بازی، برای هر نفر یک بارکد اختصاصی ارسال می‌شود که در هنگام
@@ -98,7 +99,7 @@ export const EventReserve = () => {
           bgColor={"#EAD3FF"}
           color={"#6F1BAE"}
           onClick={handleAddPhoneNumber}
-          >
+        >
           <Icon as={Plus} mx="0" color={"#6F1BAE"} />
           افزودن شماره موبایل
         </Button>
@@ -110,6 +111,7 @@ export const EventReserve = () => {
         borderRadius="6px"
         color="amir.secondaryBg"
         onClick={handleSubmit}
+        isLoading={btnLoading}
       >
         تائید و ادامه
       </Button>

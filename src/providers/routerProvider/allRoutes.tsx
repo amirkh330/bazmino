@@ -1,18 +1,17 @@
-import { NotFound } from "@/components/Common/Notfound/NotFound";
+import { PaymentPreview } from "@/Pages/Payment-Preview/PaymentPreview";
 import { CoffeesShops } from "@/Pages/Coffees-shops/Coffees-shops";
-import { EventDetail } from "@/Pages/EventDetail/EventDetail";
 import { EventReserve } from "@/Pages/EventReserve/EventReserve";
+import { NotFound } from "@/components/Common/Notfound/NotFound";
+import { EventDetail } from "@/Pages/EventDetail/EventDetail";
 import { Events } from "@/Pages/Events/Events";
-import { Reserves } from "@/Pages/Reserves/Reserves";
 import { RouteObject } from "react-router-dom";
 
 export const allRoutes: Array<RouteObject> = [
-  // { path: "/", element: <Dashboard /> },
   { path: "/events", element: <Events /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId", element: <EventDetail /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId/reserve", element: <EventReserve /> },
   { path: "/", element: <CoffeesShops /> },
-  { path: "/reserves", element: <Reserves /> },
   { path: "/event-detail/:id", element: <EventDetail /> },
+  { path: "/payment-preview/:id", element: <PaymentPreview /> },
   { path: "*", element: <NotFound /> },
 ];
