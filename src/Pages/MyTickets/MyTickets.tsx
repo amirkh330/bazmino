@@ -8,11 +8,15 @@ import {
   Image,
   Text,
   chakra,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { CalendarBlank, Coffee } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
+import { Ticket } from "../Ticket/Ticket";
 
 export const MyTickets = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <chakra.div>
       {false ? (
@@ -70,13 +74,14 @@ export const MyTickets = () => {
               >
                 مشاهده بازی
               </Button>
-              <Button bgColor="amir.primary" color="amir.secondaryBg" w="50%">
+              <Button bgColor="amir.primary" color="amir.secondaryBg" w="50%" onClick={onOpen}>
                 مشاهده بلیط
               </Button>
             </Flex>
           </Flex>
         </chakra.div>
       )}
+      <Ticket isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       <Footer />
     </chakra.div>
   );
