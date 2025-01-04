@@ -9,7 +9,7 @@ export const useEventReserve = () => {
   const [value, setValue] = useState<string>("");
   const [errMsg, setErrMsg] = useState<boolean>(false);
   const [btnLoading, setBtnLoading] = useState<boolean>(false);
-  const [phoneNumberList, setPhoneNumberList] = useState<number[]>([]);
+  const [phoneNumberList, setPhoneNumberList] = useState<string[]>([]);
 
   const handleDeletePhoneNumber = (index: number) => {
     const updatedPhoneNumbers = [...phoneNumberList];
@@ -20,7 +20,7 @@ export const useEventReserve = () => {
   const handleAddPhoneNumber = () => {
     if (phoneRegex.test(value)) {
       setValue("");
-      setPhoneNumberList((_phoneNumberList)=>([..._phoneNumberList, Number(value)]));
+      setPhoneNumberList((_phoneNumberList)=>([..._phoneNumberList, value]));
     } else {
       setErrMsg(true);
     }
