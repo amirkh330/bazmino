@@ -1,25 +1,27 @@
-import { CallApi } from "@/settings/axiosConfig";
+import { Toman } from "@/utils/Toman/Toman";
 import {
-  Box,
   Button,
   chakra,
   Divider,
   Flex,
   Icon,
   Input,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { CheckCircle } from "@phosphor-icons/react";
 import { Cardholder } from "@phosphor-icons/react/dist/ssr";
-import { useParams } from "react-router-dom";
+import { usePaymentPreview } from "./PaymentPreview.biz";
 export const PaymentPreview = () => {
-  const { id } = useParams();
+  const {
+    discount,
+    handlePayment,
+    handleSubmitSetDiscount,
+    setDiscount,
+    item,
+    msgError,
+    loading,
+  } = usePaymentPreview();
 
-  const handlePayment = () => {
-    CallApi.post(`/orders/${id}/payments`).then(({ data }) => {
-      window.location.href = data;
-    });
-  };
   return (
     <chakra.div>
       <chakra.div h="calc(100vh - 110px)">
@@ -29,18 +31,46 @@ export const PaymentPreview = () => {
           </Text>
           <Flex mx="0" alignItems="center" justifyContent="space-between">
             <Text fontSize={"14px"} fontWeight={400} color={"amir.common"}>
-              هزینه رزرو (۴ نفر)
+              هزینه رزرو
             </Text>
-            <Text fontSize={"14px"} fontWeight={400} color={"amir.common"}>
-              ۶۲۹.۰۰۰ تومان
+            <Text fontSize={"16px"} fontWeight={600} color={"amir.common"}>
+              {Toman(item.totalAmount)}
             </Text>
           </Flex>
           <Flex mx="0" alignItems="center" justifyContent="space-between">
-            <Text fontSize={"14px"} fontWeight={400} color={"amir.common"}>
-              تخفیف{" "}
+            <Text fontSize={"14px"} fontWeight={400} color={"green.300"}>
+              تخفیف بازی
             </Text>
+            <Text fontSize={"16px"} fontWeight={600} color={"green.300"}>
+              {Toman(item.eventDiscountAmount)}
+            </Text>
+          </Flex>
+          {item.discountCodeAmount && (
+            <Flex mx="0" alignItems="center" justifyContent="space-between">
+              <Text fontSize={"14px"} fontWeight={400} color={"green.300"}>
+                کد تخفیف
+              </Text>
+              <Text fontSize={"16px"} fontWeight={600} color={"green.300"}>
+                {Toman(item.discountCodeAmount)}
+              </Text>
+            </Flex>
+          )}
+
+          <Flex mx="0" alignItems="center" justifyContent="space-between">
             <Text fontSize={"14px"} fontWeight={400} color={"amir.common"}>
-              ۶۲۹.۰۰۰ تومان
+              شارژ کیف پول
+            </Text>
+            <Text fontSize={"16px"} fontWeight={600} color={"amir.common"}>
+              {Toman(item.walletPayableAmount)}
+            </Text>
+          </Flex>
+
+          <Flex mx="0" alignItems="center" justifyContent="space-between">
+            <Text fontSize={"16px"} fontWeight={600} color={"amir.common"}>
+              مبلغ نهایی
+            </Text>
+            <Text fontSize={"16px"} fontWeight={600} color={"amir.common"}>
+              {Toman(item.finalAmount)}
             </Text>
           </Flex>
         </Flex>
@@ -55,15 +85,22 @@ export const PaymentPreview = () => {
             justifyContent="space-between"
             gap="2"
           >
-            <Input color="amir.common" />
+            <Input
+              color="amir.common"
+              value={discount}
+              onChange={(e) => setDiscount(e.target.value)}
+            />
             <Button
+              isLoading={loading}
               variant={"outline"}
-              borderColor={"amir.primary"}
               color={"amir.primary"}
+              borderColor={"amir.primary"}
+              onClick={handleSubmitSetDiscount}
             >
               اعمال کد
             </Button>
           </Flex>
+          {msgError && <Text color="red.500">کد تخفیف اشتباه است.</Text>}
         </Flex>
         <Divider color="gray.600" my="24px" />
         <Flex flexDirection="column" mx="0" px="4" gap="24px">
