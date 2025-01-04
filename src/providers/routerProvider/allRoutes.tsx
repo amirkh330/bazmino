@@ -11,6 +11,8 @@ import { Profile } from "@/Pages/Profile/Profile";
 import { Wallet } from "@/Pages/Wallet/Wallet";
 import { EditProfile } from "@/Pages/EditProfile/EditProfile";
 import { Transactions } from "@/Pages/Transactions/Transactions";
+import { PaymentFailed } from "@/Pages/Payment-Failed/PaymentFailed";
+import { PaymentSuccess } from "@/Pages/Payment-Success/PaymentSuccess";
 
 export const allRoutes: Array<RouteObject> = [
   { path: "/profile", element: <Profile /> },
@@ -25,5 +27,7 @@ export const allRoutes: Array<RouteObject> = [
   { path: "/event-detail/:id", element: <EventDetail /> },
   { path: "/payment-preview/:id", element: <PaymentPreview /> },
   { path: "/payment/callback", element: <PaymentCallBack /> },
+  { path: "/payment/success", element: <PaymentSuccess /> },
+  { path: "/payment/failed", element: <PaymentFailed /> },
   { path: "*", element: <NotFound /> },
 ];

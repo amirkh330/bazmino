@@ -10,16 +10,16 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
   return (
     <Card
       as={Link}
-      to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
-      bg="amir.secondaryBg"
-      color="amir.common"
-      borderRadius="4px"
       mx="6px"
-      overflow={"hidden"}
       my="12px"
+      overflow="hidden"
+      borderRadius="4px"
+      color="amir.common"
+      bg="amir.secondaryBg"
+      to={`/events/${event.eventId}/dates/${event.dateId}/times/${event.timeId}`}
     >
       <Box>
-        <Image src={event.game.logoUrl} />
+        <Image h="200px" src={event.game.logoUrl} />
         <Box
           borderRadius="50%"
           w="40px"
