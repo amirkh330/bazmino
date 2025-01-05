@@ -21,6 +21,8 @@ const useAuthStore = create<AuthState>()(
         set({
           isAuth: false,
         });
+        localStorage.clear();
+          document.cookie = "x-a=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.bazmino.com;";
       },
     }),
     {

@@ -9,18 +9,15 @@ import {
   Icon,
   Image,
   Text,
-  chakra
+  chakra,
 } from "@chakra-ui/react";
-import {
-  Calendar,
-  Coffee,
-  MapPin,
-  ShareNetwork
-} from "@phosphor-icons/react";
-import { useEventDetail } from "../EventDetail/EventDetail.biz";
+import { Calendar, Coffee, MapPin, ShareNetwork } from "@phosphor-icons/react";
+import { usePaymentCallBack } from "./PaymentCallBack.biz";
+import { useNavigate } from "react-router-dom";
 
 export const PaymentCallBack = () => {
-  const { loading, eventItem, handleShare } = useEventDetail();
+  const navigate = useNavigate();
+  const { loading, eventItem, handleShare } = usePaymentCallBack();
   return (
     <>
       {loading && !eventItem ? (
@@ -53,7 +50,7 @@ export const PaymentCallBack = () => {
           >
             <Box p="4">
               <Image
-                src={eventItem?.game.logoUrl}
+                src={eventItem?.event.logoUrl}
                 maxH={"380px"}
                 w={"full"}
                 objectFit={"cover"}
@@ -67,7 +64,7 @@ export const PaymentCallBack = () => {
                 justifyContent="space-between"
               >
                 <Text fontSize={"20px"} fontWeight={600} color="amir.common">
-                  {eventItem?.game.title}
+                  {eventItem?.event.title}
                 </Text>
 
                 <Icon
@@ -94,7 +91,8 @@ export const PaymentCallBack = () => {
                   </Text>
                 </Flex>
                 <Text fontSize={"16px"} fontWeight={500} color="amir.secondary">
-                  {eventItem?.host.title} - {eventItem?.host.districtTitle}
+                  {eventItem?.event.host.title} -{" "}
+                  {eventItem?.event.host.districtTitle}
                 </Text>
               </Flex>
               <Flex
@@ -134,7 +132,7 @@ export const PaymentCallBack = () => {
                 fontWeight={500}
                 color="amir.secondary"
               >
-                {eventItem?.host.address}
+                {eventItem?.event.host.address}
               </Text>
 
               <Map lat={35.6892} lng={51.389} />
@@ -152,37 +150,24 @@ export const PaymentCallBack = () => {
                   مبلغ خرید
                 </Text>
                 <Text fontWeight={400} fontSize={"16px"} color="amir.common">
-                  {Toman(400000)}
+                  {Toman(eventItem?.finalAmount!)}
                 </Text>
               </Flex>
+
+            
 
               <Flex
                 mx="0"
                 alignItems="center"
                 justifyContent="space-between"
                 gap="1"
-                my="2"
+                my="3"
               >
                 <Text fontWeight={400} fontSize={"14px"} color="amir.common">
-                  تاریخ خرید
+                  ساعت و تاریخ خرید
                 </Text>
                 <Text fontWeight={400} fontSize={"16px"} color="amir.common">
-                  ۱۳۷۳/۱۰/۱۲
-                </Text>
-              </Flex>
-
-              <Flex
-                mx="0"
-                alignItems="center"
-                justifyContent="space-between"
-                gap="1"
-                my="2"
-              >
-                <Text fontWeight={400} fontSize={"14px"} color="amir.common">
-                  ساعت خرید
-                </Text>
-                <Text fontWeight={400} fontSize={"16px"} color="amir.common">
-                  ۱۲:۳۰
+                  {eventItem?.dateTime}
                 </Text>
               </Flex>
 
@@ -197,7 +182,7 @@ export const PaymentCallBack = () => {
                   کد رهگیری
                 </Text>
                 <Text fontWeight={600} fontSize={"16px"} color="amir.common">
-                  ۱۲۳۱۲۳۱۳۲
+                  {eventItem?.transactionRefId}
                 </Text>
               </Flex>
             </Box>
@@ -216,7 +201,7 @@ export const PaymentCallBack = () => {
               borderRadius="6px"
               bgColor="amir.primary"
               color="amir.secondaryBg"
-              onClick={() => {}}
+              onClick={() => navigate('/my-tickets')}
             >
               مشاهده بلیط رزرو
             </Button>

@@ -27,7 +27,7 @@ export const allRoutes: Array<RouteObject> = [
   { path: "/event-detail/:id", element: <EventDetail /> },
   { path: "/payment-preview/:id", element: <PaymentPreview /> },
   { path: "/payment/callback", element: <PaymentCallBack /> },
-  { path: "/payment/success", element: <PaymentSuccess /> },
+  { path: "/payment/success", element: <PaymentCallBack /> },
   { path: "/payment/failed", element: <PaymentFailed /> },
   { path: "*", element: <NotFound /> },
 ];
