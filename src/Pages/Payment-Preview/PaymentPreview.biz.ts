@@ -6,6 +6,7 @@ export const usePaymentPreview = () => {
   const [discount, setDiscount] = useState("");
   const [discountCode, setDiscountCode] = useState<string>("");
   const [msgError, setMsgError] = useState(false);
+  const [useWallet, setUseWallet] = useState(false);
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState<Item>({
     discountCodeAmount: 0,
@@ -13,19 +14,26 @@ export const usePaymentPreview = () => {
     finalAmount: 0,
     totalAmount: 0,
     walletPayableAmount: 0,
+    walletWithDrawAmount: 0,
+    userWalletBalance: 0,
   });
+
   type Item = {
     discountCodeAmount: number;
     eventDiscountAmount: number;
     finalAmount: number;
     totalAmount: number;
     walletPayableAmount: number;
+
+    walletWithDrawAmount?: number;
+    userWalletBalance?: number;
   };
 
   useEffect(() => {
     setLoading(true);
     CallApi.post(`/orders/${id}/_checkout`, {
       discountCode: discountCode,
+      useWallet,
     })
       .then(({ data }) => {
         setItem(data);
@@ -59,5 +67,7 @@ export const usePaymentPreview = () => {
     item,
     msgError,
     loading,
+    useWallet,
+    setUseWallet,
   };
 };

@@ -6,6 +6,7 @@ import {
   Flex,
   Icon,
   Input,
+  Switch,
   Text,
 } from "@chakra-ui/react";
 import { CheckCircle } from "@phosphor-icons/react";
@@ -20,6 +21,8 @@ export const PaymentPreview = () => {
     item,
     msgError,
     loading,
+    useWallet,
+    setUseWallet,
   } = usePaymentPreview();
 
   return (
@@ -142,6 +145,57 @@ export const PaymentPreview = () => {
               weight="fill"
             />
           </Flex>
+          {item.userWalletBalance && (
+            <Flex
+              borderRadius="8px"
+              border="1px solid"
+              borderColor={useWallet ? "amir.primary" : "transparent"}
+              background="amir.secondaryBg"
+              px="16px"
+              py="16px"
+              mx="0"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Flex
+                alignItems="center"
+                mx="0"
+                justifyContent={"space-between"}
+                gap="2"
+              >
+                <Icon
+                  as={Cardholder}
+                  mx="0"
+                  w="6"
+                  h="6"
+                  p="1"
+                  bgColor={"amir.common"}
+                  borderRadius={"50%"}
+                />
+                <Text fontSize={"14px"} fontWeight={400} color={"amir.common"}>
+                  پرداخت از کیف پول - {Toman(item.userWalletBalance)}
+                </Text>
+              </Flex>
+
+              <Switch
+                mx="0"
+                sx={{
+                  ".chakra-switch__track": {
+                    _checked: {
+                      bg: "amir.primary",
+                    },
+                  },
+
+                  ".chakra-switch__thumb": {
+                    m: "0",
+                    bg: "amir.common",
+                  },
+                }}
+                checked={useWallet}
+                onChange={(e) => setUseWallet(e.target.checked)}
+              />
+            </Flex>
+          )}
         </Flex>
       </chakra.div>
       <chakra.div px="4">
