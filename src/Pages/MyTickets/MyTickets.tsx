@@ -71,11 +71,12 @@ export const MyTickets = () => {
         </chakra.div>
       ) : (
         <chakra.div h="calc(100vh - 120px)" p="4" mx="0">
-          {reserveList.map((item, index) => {
+          {reserveList.map((item) => {
             return (
               <Flex
                 key={item.event.title}
                 mx="0"
+                my="4"
                 p="2"
                 gap="1"
                 flexDirection="column"
@@ -110,8 +111,8 @@ export const MyTickets = () => {
                       fontWeight={400}
                       color="amir.secondary"
                     >
-                      {item.event.host?.title} - {item.event.host?.districtTitle}{" "}
-                      <Icon as={Coffee} />
+                      {item.event.host?.title} -{" "}
+                      {item.event.host?.districtTitle} <Icon as={Coffee} />
                     </Text>
                     <Text
                       fontSize={"12px"}
