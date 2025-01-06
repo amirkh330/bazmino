@@ -6,7 +6,7 @@ import {
   Flex,
   Icon,
   Input,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { CheckCircle } from "@phosphor-icons/react";
 import { Cardholder } from "@phosphor-icons/react/dist/ssr";
@@ -56,14 +56,16 @@ export const PaymentPreview = () => {
             </Flex>
           )}
 
-          <Flex mx="0" alignItems="center" justifyContent="space-between">
-            <Text fontSize={"14px"} fontWeight={400} color={"amir.common"}>
-              شارژ کیف پول
-            </Text>
-            <Text fontSize={"16px"} fontWeight={600} color={"amir.common"}>
-              {Toman(item.walletPayableAmount)}
-            </Text>
-          </Flex>
+          {item.walletPayableAmount && (
+            <Flex mx="0" alignItems="center" justifyContent="space-between">
+              <Text fontSize={"14px"} fontWeight={400} color={"amir.common"}>
+                شارژ کیف پول
+              </Text>
+              <Text fontSize={"16px"} fontWeight={600} color={"amir.common"}>
+                {Toman(item.walletPayableAmount)}
+              </Text>
+            </Flex>
+          )}
 
           <Flex mx="0" alignItems="center" justifyContent="space-between">
             <Text fontSize={"16px"} fontWeight={600} color={"amir.common"}>
