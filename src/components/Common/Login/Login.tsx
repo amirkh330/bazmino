@@ -116,7 +116,7 @@ const OtpStep = ({ otp, setOtp, handleSendOtp, loading }: any) => {
     <Box mx="auto" p="4">
       <Text color={"amir.common"}>کد ارسال شده را وارد کنید</Text>
       <HStack my="6" justifyContent={"space-around"} mx="8" dir="ltr">
-        <PinInput value={otp} onChange={setOtp}>
+        <PinInput value={otp} onChange={e=>setOtp(persianToEnglishNumbers(e))}>
           <PinInputField color={"amir.common"} />
           <PinInputField color={"amir.common"} />
           <PinInputField color={"amir.common"} />
