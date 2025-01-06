@@ -17,7 +17,7 @@ export const useLogin = () => {
   const [serverOtpKey, setServerOtpKey] = useState(null);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<"phone" | "otp">("phone");
-  const { login:handleLogin} = useAuthStore();
+  const { login: handleLogin } = useAuthStore();
   const handleSendOtp = async () => {
     setLoading(true);
     axios
@@ -51,7 +51,7 @@ export const useLogin = () => {
     setStep("phone");
     setOtp("");
   };
-
+  const activeRoute=window.location;
   const handleVerifyOtp = async () => {
     axios
       .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authenticate`, {
@@ -60,7 +60,9 @@ export const useLogin = () => {
       })
       .then(({ data }) => {
         window.location.replace(
-          `${import.meta.env.VITE_APP_BASE_URL}/auth/_authorize?code=${data}`
+          `${
+            import.meta.env.VITE_APP_BASE_URL
+          }/auth/_authorize?code=${data}&returnUrl=${"/activeRoute"}`
         );
       })
       .catch((err) => {

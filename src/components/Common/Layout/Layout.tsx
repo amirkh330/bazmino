@@ -19,8 +19,8 @@ export const Layout = () => {
       .catch(({ status }) => {
         if (status == 401) {
           logout();
-          navigate("/");
-          onOpen();
+          // navigate("/");
+          // onOpen();
           // toast({
           //   description: "لطفا وارد شوید",
           //   status: "info",
