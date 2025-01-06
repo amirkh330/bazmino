@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useAuthStore from "@/store/authStore";
 import { phoneRegex } from "@/utils/Regex/Regex";
+import { useLocation, useRoutes } from "react-router-dom";
 
 interface ILogin {
   isOpen: boolean;
@@ -51,7 +52,7 @@ export const useLogin = () => {
     setStep("phone");
     setOtp("");
   };
-  const activeRoute = window.location;
+  const { pathname } = useLocation();
   const handleVerifyOtp = async () => {
     axios
       .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authenticate`, {
@@ -62,7 +63,7 @@ export const useLogin = () => {
         window.location.replace(
           `${
             import.meta.env.VITE_APP_BASE_URL
-          }/auth/_authorize?code=${data}&returnUrl=${activeRoute}`
+          }/auth/_authorize?code=${data}&returnUrl=${pathname}`
         );
       })
       .catch((err) => {
