@@ -51,7 +51,7 @@ export const useLogin = () => {
     setStep("phone");
     setOtp("");
   };
-  const activeRoute=window.location;
+  const activeRoute = window.location;
   const handleVerifyOtp = async () => {
     axios
       .post(`${import.meta.env.VITE_APP_BASE_URL}/auth/_authenticate`, {
@@ -62,7 +62,7 @@ export const useLogin = () => {
         window.location.replace(
           `${
             import.meta.env.VITE_APP_BASE_URL
-          }/auth/_authorize?code=${data}&returnUrl=${"/activeRoute"}`
+          }/auth/_authorize?code=${data}&returnUrl=${activeRoute}`
         );
       })
       .catch((err) => {
