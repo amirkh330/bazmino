@@ -37,13 +37,11 @@ export interface Host {
 export const MyTickets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [reserveList, setReserveList] = useState<IEventItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setLoading(true);
     CallApi.get("/me/reservations")
       .then(({ data }) => {
-        console.log("data:", data);
         setReserveList(data);
       })
       .finally(() => {
@@ -51,11 +49,16 @@ export const MyTickets = () => {
       });
   }, []);
   return (
-    <chakra.div>
+    <chakra.div
+      display="flex"
+      h="calc(100vh - 58px)"
+      flexDirection="column"
+      justifyContent="space-between"
+    >
       {loading ? (
         <Loading />
       ) : !reserveList.length ? (
-        <chakra.div h="calc(100vh - 120px)" p="4">
+        <chakra.div p="4">
           <Text fontSize={"14px"} fontWeight={400} color="amir.common">
             برای دریافت بارکد اختصاصی، هر یک از افراد وارد سایت جورچین شده و در
             صفحه (بازی‌های من)، شماره موبایل خود را وارد کنند.
@@ -70,7 +73,7 @@ export const MyTickets = () => {
           </Center>
         </chakra.div>
       ) : (
-        <chakra.div h="calc(100vh - 120px)" p="4" mx="0">
+        <chakra.div px="4" mx="0" overflow={"auto"}>
           {reserveList.map((item) => {
             return (
               <Flex

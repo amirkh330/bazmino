@@ -1,4 +1,4 @@
-import { extendBaseTheme, extendTheme } from "@chakra-ui/react";
+import { extendBaseTheme, extendTheme, Input, Switch } from "@chakra-ui/react";
 import { color } from "framer-motion";
 
 export const customTheme = extendTheme({
@@ -11,5 +11,13 @@ export const customTheme = extendTheme({
       secondaryVariant: "#AFAFAF",
       common: "#FFFFFF",
     },
+  },
+  components: {
+    Button: {
+      baseStyle: {
+        borderRadius: "8px",
+      },
+    },
+    
   },
 });
