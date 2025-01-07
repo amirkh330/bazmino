@@ -44,7 +44,10 @@ export const usePaymentPreview = () => {
   }, [discountCode]);
 
   const handlePayment = () => {
-    CallApi.post(`/orders/${id}/payments`).then(({ data }) => {
+    CallApi.post(`/orders/${id}/payments`, {
+      discountCode: discountCode,
+      useWallet,
+    }).then(({ data }) => {
       window.location.href = data;
     });
   };

@@ -14,13 +14,13 @@ export const Ticket = ({
   ticketItem: ITicketItem;
   onClose: () => void;
 }) => {
-  const [qr, setQr] = useState('')
-  useEffect(() => {
-    CallApi.get(ticketItem.ticketAddress).then(({ data }) => {
-      setQr(data);
-    });
-  }, []);
-  // handle control visiblity of bottomsheet
+  // const [qr, setQr] = useState('')
+  // useEffect(() => {
+  //   CallApi.get(ticketItem.ticketAddress).then(({ data }) => {
+  //     setQr(data);
+  //   });
+  // }, []);
+  // // handle control visiblity of bottomsheet
   return (
     <BottomSheet
       title={ticketItem.event.title}
@@ -55,11 +55,12 @@ export const Ticket = ({
           >
             {ticketItem.id} - کد رزرو
           </Text>
-          {qr?
-          <Image src="/images/ticket.png" w="50%" />
+          <Image src={ticketItem.ticketAddress} w="50%" />
+          {/* {qr?
+          <Image src={ticketItem.ticketAddress} w="50%" />
           :
           <Loading />
-          }
+          } */}
           <Divider my="6" borderColor={"amir.common"} variant="dashed" />
           <Button
             w="full"
