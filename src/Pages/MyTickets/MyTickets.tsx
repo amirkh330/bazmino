@@ -16,10 +16,11 @@ import { Ticket } from "../Ticket/Ticket";
 import { CallApi } from "@/settings/axiosConfig";
 import { Loading } from "@/components/CoreComponents/Loading/Loading";
 
-export interface IEventItem {
+export interface ITicketItem {
   id: number;
   status: string;
   event: IReserveItem;
+  ticketAddress: string;
 }
 
 export interface IReserveItem {
@@ -36,8 +37,9 @@ export interface Host {
 
 export const MyTickets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [reserveList, setReserveList] = useState<IEventItem[]>([]);
+  const [reserveList, setReserveList] = useState<ITicketItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [activeTicket, setActiveTicket] = useState<ITicketItem>();
 
   useEffect(() => {
     CallApi.get("/me/reservations")
@@ -139,7 +141,10 @@ export const MyTickets = () => {
                     bgColor="amir.primary"
                     color="amir.secondaryBg"
                     w="50%"
-                    onClick={onOpen}
+                    onClick={() => {
+                      onOpen();
+                      setActiveTicket(item);
+                    }}
                   >
                     مشاهده بلیط
                   </Button>
@@ -149,7 +154,16 @@ export const MyTickets = () => {
           })}
         </chakra.div>
       )}
-      <Ticket isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      {isOpen && (
+        <Ticket
+          isOpen={isOpen}
+          onClose={() => {
+            onClose();
+            setActiveTicket(undefined);
+          }}
+          ticketItem={activeTicket!}
+        />
+      )}
       <Footer />
     </chakra.div>
   );

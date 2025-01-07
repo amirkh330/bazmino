@@ -1,23 +1,34 @@
 import BottomSheet from "@/components/CoreComponents/BottomSheet/BottomSheet";
-import {
-  Box,
-  Button,
-  Divider,
-  Image,
-  Text,
-  chakra
-} from "@chakra-ui/react";
+import { Box, Button, Divider, Image, Text, chakra } from "@chakra-ui/react";
+import { ITicketItem } from "../MyTickets/MyTickets";
+import { useEffect, useState } from "react";
+import { CallApi } from "@/settings/axiosConfig";
+import { Loading } from "@/components/CoreComponents/Loading/Loading";
 
-export const Ticket = ({isOpen, onOpen, onClose}:{isOpen: boolean, onOpen: () => void, onClose: () => void}) => {
+export const Ticket = ({
+  isOpen,
+  ticketItem,
+  onClose,
+}: {
+  isOpen: boolean;
+  ticketItem: ITicketItem;
+  onClose: () => void;
+}) => {
+  const [qr, setQr] = useState('')
+  useEffect(() => {
+    CallApi.get(ticketItem.ticketAddress).then(({ data }) => {
+      setQr(data);
+    });
+  }, []);
   // handle control visiblity of bottomsheet
   return (
     <BottomSheet
-      title={"مافیا"}
+      title={ticketItem.event.title}
       isOpen={isOpen}
       onOpen={() => {}}
       onClose={onClose}
     >
-      <chakra.div px="4" h="45dvh" mx="0">
+      <chakra.div px="4" h="65dvh" mx="0">
         <Text
           textAlign={"start"}
           fontSize={"14px"}
@@ -42,9 +53,13 @@ export const Ticket = ({isOpen, onOpen, onClose}:{isOpen: boolean, onOpen: () =>
             color={"amir.primary"}
             textAlign={"center"}
           >
-            کد رزرو ۲۰۲۱۳
+            {ticketItem.id} - کد رزرو
           </Text>
+          {qr?
           <Image src="/images/ticket.png" w="50%" />
+          :
+          <Loading />
+          }
           <Divider my="6" borderColor={"amir.common"} variant="dashed" />
           <Button
             w="full"
