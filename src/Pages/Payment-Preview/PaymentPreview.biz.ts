@@ -41,7 +41,7 @@ export const usePaymentPreview = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [discountCode]);
+  }, [discountCode,useWallet]);
 
   const handlePayment = () => {
     CallApi.post(`/orders/${id}/payments`, {
