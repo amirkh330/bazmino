@@ -16,7 +16,7 @@ export default defineConfig(() => {
       port: 3000,
       proxy: {
         "/api": {
-          target: "https://bazmino.com",
+          target: "https://jourchin.com",
           changeOrigin: true,
           secure: true, // Ensures HTTPS connection
           cookieDomainRewrite: "localhost", // Rewrites cookies for localhost
