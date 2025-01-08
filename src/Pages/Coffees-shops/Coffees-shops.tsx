@@ -9,8 +9,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
+import { useCoffeesShops } from "./CoffeesShops.biz";
 
 export const CoffeesShops = () => {
+  const {}=useCoffeesShops()
   return (
     <chakra.div
       pt="4"

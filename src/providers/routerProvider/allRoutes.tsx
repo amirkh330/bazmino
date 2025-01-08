@@ -13,6 +13,7 @@ import { EditProfile } from "@/Pages/EditProfile/EditProfile";
 import { Transactions } from "@/Pages/Transactions/Transactions";
 import { PaymentFailed } from "@/Pages/Payment-Failed/PaymentFailed";
 import { PaymentSuccess } from "@/Pages/Payment-Success/PaymentSuccess";
+import { CoffeeShopDetail } from "@/Pages/CoffeeShopDetail/CoffeeShopDetail";
 
 export const allRoutes: Array<RouteObject> = [
   { path: "/profile", element: <Profile /> },
@@ -23,7 +24,7 @@ export const allRoutes: Array<RouteObject> = [
   { path: "events/:eventId/dates/:dateId/times/:timeId", element: <EventDetail /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId/reserve", element: <EventReserve /> },
   { path: "/coffees", element: <CoffeesShops /> },
-  { path: "/coffees/:id", element: <CoffeesShops /> },
+  { path: "/coffees/:id", element: <CoffeeShopDetail /> },
   { path: "/my-tickets", element: <MyTickets /> },
   { path: "/event-detail/:id", element: <EventDetail /> },
   { path: "/payment-preview/:id", element: <PaymentPreview /> },
