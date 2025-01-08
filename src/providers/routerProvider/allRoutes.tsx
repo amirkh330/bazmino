@@ -23,6 +23,7 @@ export const allRoutes: Array<RouteObject> = [
   { path: "events/:eventId/dates/:dateId/times/:timeId", element: <EventDetail /> },
   { path: "events/:eventId/dates/:dateId/times/:timeId/reserve", element: <EventReserve /> },
   { path: "/coffees", element: <CoffeesShops /> },
+  { path: "/coffees/:id", element: <CoffeesShops /> },
   { path: "/my-tickets", element: <MyTickets /> },
   { path: "/event-detail/:id", element: <EventDetail /> },
   { path: "/payment-preview/:id", element: <PaymentPreview /> },
