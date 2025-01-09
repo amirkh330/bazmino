@@ -1,15 +1,22 @@
-import { Footer } from "@/components/Common/Footer/Footer";
-import { Loading } from "@/components/CoreComponents/Loading/Loading";
 import { CallApi } from "@/settings/axiosConfig";
-import { Box, chakra } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { ICoffeeShopDetail } from "@/types/responses/ResponsesTypes";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export const useCoffeeShopDetail = () => {
-  const [coffeeShopItem, setCoffeeShopItem] = useState({})
+  const { id } = useParams();
+  const [coffee, setCoffee] = useState<ICoffeeShopDetail>();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    CallApi.get(`/coffee-shops/}`).then(({ data }) => {
-      setCoffeeShopItem(data)
-    })
-  },[])
-  return {};
+    setLoading(true);
+    CallApi.get(`/hosts/${id}/_detail`)
+      .then(({ data }) => {
+        setCoffee(data);
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+  return { loading, coffee };
 };

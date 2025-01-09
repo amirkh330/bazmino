@@ -66,3 +66,32 @@ export enum GameMode {
   mafia = "mafia",
   golyapoch = "golyapoch",
 }
+
+export interface ICoffeeShopListItem {
+  id: number;
+  title: string;
+  logoUrl: string;
+  rate: number;
+  address: string;
+}
+
+export interface ICoffeeShopDetail {
+  id: number;
+  title: string;
+  logoUrl:string
+  rate: number;
+  address: string;
+  imageUrls: [];
+  description: string;
+  menuUrl: string;
+  facilities: [];
+}
+
+export enum FacilityType {
+  "Parking"="Parking",
+  "FreeWifi"="FreeWifi",
+  "Meal"="Meal",
+  "Wc"="Wc",
+  "Smoking"="Smoking",
+  "OpenSpace"="OpenSpace"
+}

@@ -7,6 +7,7 @@ import { Coffee, Users } from "@phosphor-icons/react/dist/ssr";
 import { Link } from "react-router-dom";
 
 export const EventCard = ({ event }: { event: IEventItem }) => {
+  const allowShowHost = !!event.host;
   return (
     <Card
       as={Link}
@@ -20,25 +21,27 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
     >
       <Box>
         <Image h="200px" src={event.game.logoUrl} />
-        <Box
-          borderRadius="50%"
-          w="40px"
-          h="40px"
-          overflow={"hidden"}
-          mx="0"
-          position="relative"
-          top="-30px"
-          right="10px"
-        >
-          <Image
-            src={event.host.logoUrl}
+        {allowShowHost && (
+          <Box
+            borderRadius="50%"
             w="40px"
             h="40px"
-            objectFit={"cover"}
             overflow={"hidden"}
             mx="0"
-          />
-        </Box>
+            position="relative"
+            top="-30px"
+            right="10px"
+          >
+            <Image
+              src={event.host.logoUrl}
+              w="40px"
+              h="40px"
+              objectFit={"cover"}
+              overflow={"hidden"}
+              mx="0"
+            />
+          </Box>
+        )}
       </Box>
       <Box mx="0" gap="6px" p="1" display="flex" flexDirection="column">
         <Text fontSize={"14px"} color="amir.common">
@@ -47,9 +50,9 @@ export const EventCard = ({ event }: { event: IEventItem }) => {
         <Flex mx="0" alignItems={"center"} gap="1">
           <Icon mx="0" as={Coffee} />
 
-          <Text fontSize={"10px"} color="amir.secondary">
+          {allowShowHost &&<Text fontSize={"10px"} color="amir.secondary">
             {event.host.title} - {event.host.district}
-          </Text>
+          </Text>}
         </Flex>
         <Flex mx="0" alignItems={"center"} justifyContent="space-between">
           <Flex mx="0" alignItems={"center"} gap="1" flexWrap={"nowrap"}>

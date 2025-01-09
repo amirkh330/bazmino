@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../Loading/Loading";
 
 interface InfinityScrollProps<T> {
+  wrapper: React.ReactElement
   items: T[]; // لیستی از داده‌ها
   total: number;
   loadMore: () => void; // تابع برای بارگذاری بیشتر داده‌ها
@@ -15,6 +16,7 @@ const InfinityScroll = <T,>({
   loadMore,
   total,
   renderItem,
+  wrapper
 }: InfinityScrollProps<T>) => {
   return (
     <InfiniteScroll
@@ -36,11 +38,14 @@ const InfinityScroll = <T,>({
       //   </p>
       // }
     >
-      <Grid templateColumns="repeat(2, 1fr)">
-        {items.map((item, index) => (
+      {/* <Grid templateColumns="repeat(2, 1fr)"> */}
+        {React.cloneElement(wrapper, {}, items.map((item, index) => (
           <React.Fragment key={index}>{renderItem(item, index)}</React.Fragment>
-        ))}
-      </Grid>
+        )))}
+        {/* {items.map((item, index) => (
+          <React.Fragment key={index}>{renderItem(item, index)}</React.Fragment>
+        ))} */}
+      {/* </Grid> */}
     </InfiniteScroll>
   );
 };

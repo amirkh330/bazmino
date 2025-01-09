@@ -80,6 +80,7 @@ export const Events = () => {
           ) : (
             <InfinityScroll
               items={eventList}
+              wrapper={<Grid templateColumns="repeat(2, 1fr)" />}
               total={total!}
               loadMore={() => {
                 setPage((_prevPage) => _prevPage + 1);

@@ -10,7 +10,7 @@ export const Footer = () => {
   const list = [
     { icon: <PuzzlePiece size="20" />, text: "بازی", url: "/events" },
     { icon: <Coffee size="20" />, text: "کافه", url: "/coffees" },
-    { icon: <Ticket size="20" />, text: "رزروهای من", url: "/my-tickets" },
+    { icon: <Ticket size="20" />, text: "بازی‌های من", url: "/my-tickets" },
   ];
   return (
     <Flex

@@ -10,9 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useCoffeesShops } from "./CoffeesShops.biz";
+import { ICoffeeShopListItem } from "@/types/responses/ResponsesTypes";
+import { Loading } from "@/components/CoreComponents/Loading/Loading";
+import InfinityScroll from "@/components/CoreComponents/InfiniteScroll/InfiniteScroll";
 
 export const CoffeesShops = () => {
-  const {}=useCoffeesShops()
+  const { coffeeShopList, page, setPage, total, loading } = useCoffeesShops();
   return (
     <chakra.div
       pt="4"
@@ -69,9 +72,22 @@ export const CoffeesShops = () => {
         <Text fontSize={"14px"} fontWeight={600} color="amir.common" py="24px">
           کافه ها
         </Text>
-        {Array(10).fill("").map((_, index) => {
-          return <CoffeeCard key={index}/>
-        })}
+
+        {loading && !coffeeShopList.length ? (
+          <Loading />
+        ) : (
+          <InfinityScroll
+            items={coffeeShopList}
+            wrapper={<></>}
+            total={total!}
+            loadMore={() => {
+              setPage((_prevPage) => _prevPage + 1);
+            }}
+            renderItem={(item: ICoffeeShopListItem, index: number) => {
+              return <CoffeeCard coffee={item} />;
+            }}
+          />
+        )}
       </chakra.div>
       <Footer />
     </chakra.div>
