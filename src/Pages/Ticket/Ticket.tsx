@@ -44,7 +44,7 @@ export const Ticket = ({
           p="6"
           bgColor={"amir.secondaryBg"}
           border={"1px solid"}
-          borderColor={"#AFAFAF"}
+          borderColor={"amir.secondaryVariant"}
           borderRadius={"8px"}
         >
           <Text

@@ -19,9 +19,11 @@ import { useCoffeeShopDetail } from "./CoffeeShop.biz";
 import { MapPin } from "@phosphor-icons/react/dist/ssr";
 import { CoffeeInfoSection } from "@/components/CoreComponents/CoffeeInfoSection/CoffeeInfoSection";
 import { GameSection } from "@/components/CoreComponents/GameSection/GameSection";
+import Carousel from "@/components/CoreComponents/Carousel/Carousel";
 
 export const CoffeeShopDetail = () => {
   const { coffee, loading } = useCoffeeShopDetail();
+
   return (
     <>
       {loading ? (
@@ -69,6 +71,7 @@ export const CoffeeShopDetail = () => {
                 </Flex>
               </Box>
             </Flex>
+
 
             <Tabs mx="0" color="amir.secondary">
               <TabList border={"none"}>

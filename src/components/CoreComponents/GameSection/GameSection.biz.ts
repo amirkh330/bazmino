@@ -27,6 +27,7 @@ export const useGameSection = ({ coffee }: { coffee: ICoffeeShopDetail }) => {
   }, []);
 
   useEffect(() => {
+    if (!activeDate) return;
     setLoadingSans(true);
     CallApi.get(`/hosts/${coffee.id}/dates/${activeDate}/times`)
       .then(({ data }: any) => {
@@ -39,6 +40,7 @@ export const useGameSection = ({ coffee }: { coffee: ICoffeeShopDetail }) => {
   }, [activeDate]);
 
   useEffect(() => {
+    if (!activeDate || !activeSans) return;
     setLoadingEvent(true);
     CallApi.get(
       `/hosts/${coffee.id}/dates/${activeDate}/times/${activeSans}/_events`
@@ -56,12 +58,11 @@ export const useGameSection = ({ coffee }: { coffee: ICoffeeShopDetail }) => {
     activeDate,
     setActiveDate,
     sanseis,
-    setSanseis,
     activeSans,
     setActiveSans,
+    eventList,
     loadingDate,
     loadingEvent,
     loadingSans,
-    eventList,
   };
 };

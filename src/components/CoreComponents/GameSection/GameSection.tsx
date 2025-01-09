@@ -25,7 +25,6 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
     activeDate,
     setActiveDate,
     sanseis,
-    setSanseis,
     activeSans,
     setActiveSans,
     eventList,
@@ -35,6 +34,7 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
   } = useGameSection(props);
   return (
     <chakra.div>
+      <Text fontSize={"16px"} fontWeight={600} color="amir.common">تاریخ‌ها</Text>
       <Flex align="center" overflowX="auto"  my="4">
         {loadingDate ? (
           <Loading />
@@ -74,6 +74,7 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
         )}
       </Flex>
 
+      <Text fontSize={"16px"} fontWeight={600} color="amir.common">سانس‌ها</Text>
       <Flex align="center" overflowX="auto" gap="2" my="4">
         {loadingSans ? (
           <Loading />
@@ -116,6 +117,8 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
           })
         )}
       </Flex>
+
+      <Text fontSize={"16px"} fontWeight={600} color="amir.common">بازی‌ها</Text>
       {loadingEvent ? (
         <Loading />
       ) : !eventList.length ? (
@@ -123,7 +126,7 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
           <EmptyState />
         </chakra.div>
       ) : (
-        <Grid templateColumns="repeat(2, 1fr)" gap="4">
+        <Grid templateColumns="repeat(2, 1fr)" gap="4" py="6">
           {eventList.map((item) => {
             return <EventCard event={item} />;
           })}

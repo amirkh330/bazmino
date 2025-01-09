@@ -3,9 +3,10 @@ import {
   ICoffeeShopDetail,
 } from "@/types/responses/ResponsesTypes";
 import { IconFacility } from "@/utils/IconGenerator/IconGenerator";
-import { Box, Grid, Icon, Text, chakra } from "@chakra-ui/react";
+import { Box, Flex, Grid, Icon, Text, chakra } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
+import Carousel from "../Carousel/Carousel";
 
 export const CoffeeInfoSection = ({
   coffee,
@@ -14,6 +15,8 @@ export const CoffeeInfoSection = ({
 }) => {
   return (
     <chakra.div>
+      <Carousel images={coffee?.imageUrls!} />
+
       <chakra.div my="6">
         <Text mb="6" color="amir.common" fontWeight={600} fontSize={"16px"}>
           درباره {coffee.title}
@@ -33,7 +36,6 @@ export const CoffeeInfoSection = ({
           py="3"
           px="4"
           textAlign="center"
-
           borderRadius="8px"
         >
           <Text
@@ -57,19 +59,23 @@ export const CoffeeInfoSection = ({
           {coffee?.facilities.map(
             (item: { title: string; id: FacilityType }, index) => {
               return (
-                <Box
-                  py="3"
+                <Flex
+                  py="1"
+                  gap="2"
                   px="4"
                   key={index}
-                  borderRadius="8px"
+                  borderRadius="16px"
                   border="1px solid"
-                  borderColor="amir.common"
+                  w="100%"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderColor="amir.secondaryVariant"
                 >
                   <IconFacility type={item.id || FacilityType.FreeWifi} />
                   <Text color="amir.common" fontWeight={400} fontSize={"14px"}>
                     {item.title}
                   </Text>
-                </Box>
+                </Flex>
               );
             }
           )}

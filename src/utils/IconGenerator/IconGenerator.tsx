@@ -17,5 +17,5 @@ export const IconFacility = ({type}: {type:FacilityType}) => {
     [FacilityType.Smoking]: Cigarette,
     [FacilityType.Wc]: Toilet,
   };
-  return <Icon as={icons[type]} />;
+  return <Icon mx="0" as={icons[type]} />;
 };
