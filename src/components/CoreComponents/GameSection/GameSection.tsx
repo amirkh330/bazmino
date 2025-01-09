@@ -35,7 +35,7 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
   } = useGameSection(props);
   return (
     <chakra.div>
-      <Flex align="center" overflowX="auto" gap="4" my="4">
+      <Flex align="center" overflowX="auto"  my="4">
         {loadingDate ? (
           <Loading />
         ) : !dates.length ? (
@@ -46,8 +46,8 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
               <Box
                 py="2"
                 px="4"
-                w="100px"
                 key={item.id}
+                me="4"
                 textAlign="center"
                 borderRadius="16px"
                 border="1px solid"
@@ -61,7 +61,11 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
                   activeDate == item.id ? "amir.common" : "transparent"
                 }
               >
-                <Text color="amir.common" fontWeight={400} fontSize={"14px"}>
+                <Text
+                  color="amir.common"
+                  fontWeight={400}
+                  fontSize={"14px"}
+                >
                   {item.date}
                 </Text>
               </Box>
@@ -70,7 +74,7 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
         )}
       </Flex>
 
-      <Flex align="center" overflowX="auto" gap="4" my="4">
+      <Flex align="center" overflowX="auto" gap="2" my="4">
         {loadingSans ? (
           <Loading />
         ) : !sanseis.length ? (
@@ -99,7 +103,14 @@ export const GameSection = (props: { coffee: ICoffeeShopDetail }) => {
                 fontWeight={400}
                 fontSize={"14px"}
               >
-                {item.time} : سانس‌
+                <Text
+                  w="90px"
+                  color="amir.common"
+                  fontWeight={400}
+                  fontSize={"14px"}
+                >
+                  سانس‌ : {item.time}
+                </Text>
               </Box>
             );
           })

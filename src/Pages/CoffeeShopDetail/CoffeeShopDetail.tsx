@@ -41,7 +41,7 @@ export const CoffeeShopDetail = () => {
             overflow={"auto"}
             flexDirection="column"
           >
-            <Flex mx="0" p="4px" my="4" gap="8px">
+            <Flex mx="0" my="4" px="4" gap="8px">
               <Image
                 mx="0"
                 borderRadius="50%"
@@ -70,15 +70,19 @@ export const CoffeeShopDetail = () => {
               </Box>
             </Flex>
 
-            <Tabs mx="0" color="amir.common">
+            <Tabs mx="0" color="amir.secondary">
               <TabList border={"none"}>
-                <Tab>بازی‌ها</Tab>
-                <Tab>اطلاعات کافه</Tab>
+                <Tab {...styleTabs} w="50%">
+                  بازی‌ها
+                </Tab>
+                <Tab {...styleTabs} w="50%">
+                  اطلاعات کافه
+                </Tab>
               </TabList>
 
               <TabPanels>
                 <TabPanel>
-                  <GameSection coffee={coffee!}/>
+                  <GameSection coffee={coffee!} />
                 </TabPanel>
                 <TabPanel>
                   <CoffeeInfoSection coffee={coffee!} />
@@ -91,4 +95,11 @@ export const CoffeeShopDetail = () => {
       )}
     </>
   );
+};
+
+const styleTabs = {
+  _selected: {
+    color: "amir.common",
+    borderColor: "amir.common",
+  },
 };
