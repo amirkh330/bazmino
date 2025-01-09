@@ -3,6 +3,7 @@ import { Box, Flex, Icon, Text, useDisclosure } from "@chakra-ui/react";
 import { List, User } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { Login } from "../Login/Login";
+import Menu from "../Menu/Menu";
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,7 +17,7 @@ export const Header = () => {
       p={4}
     >
       <Flex m="0" alignItems="center" gap="2">
-        <Icon as={List} size={18} />
+        <Menu/>
         <Text>جورچین</Text>
       </Flex>
 
