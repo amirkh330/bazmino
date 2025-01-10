@@ -2,6 +2,8 @@ import { Footer } from "@/components/Common/Footer/Footer";
 import { EventCard } from "@/components/CoreComponents/EventCard/EventCard";
 import { FilterSecession } from "@/components/CoreComponents/FilterSecession/FilterSecession";
 import InfinityScroll from "@/components/CoreComponents/InfiniteScroll/InfiniteScroll";
+import { Loading } from "@/components/CoreComponents/Loading/Loading";
+import { MainSwiper } from "@/components/CoreComponents/MainSwiper/MainSwiper";
 import { IEventItem } from "@/types/responses/ResponsesTypes";
 import {
   Box,
@@ -14,10 +16,9 @@ import {
 } from "@chakra-ui/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useEvents } from "./Events.biz";
-import { Loading } from "@/components/CoreComponents/Loading/Loading";
 
 export const Events = () => {
-  const { eventList, loading, total, setPage, page } = useEvents();
+  const { eventList, loading, total, setPage, list } = useEvents();
   return (
     <chakra.div
       pt="4"
@@ -27,8 +28,7 @@ export const Events = () => {
       m="0"
       justifyContent="space-between"
     >
-      <chakra.div px={4} m="0"
-      >
+      <chakra.div px={4} m="0" overflowY="auto">
         <InputGroup
           w="70%"
           m="0"
@@ -73,8 +73,13 @@ export const Events = () => {
           />
         </InputGroup>
 
+        <MainSwiper list={list} />
+
         <FilterSecession />
-        <Box h="60dvh" overflowY="auto" w={"full"}>
+        <Box
+        //  h="6dvh"
+        //  overflowY="auto"
+          w={"full"}>
           {loading && !eventList.length ? (
             <Loading />
           ) : (

@@ -5,6 +5,7 @@ import { DateObject } from "react-multi-date-picker";
 import { useSearchParams } from "react-router-dom";
 import gregorian from "react-date-object/calendars/gregorian";
 import gregorian_en from "react-date-object/locales/gregorian_en";
+import { list } from "@chakra-ui/react";
 
 export const useEvents = () => {
   const [eventList, setEventList] = useState<IEventItem[]>([]);
@@ -41,5 +42,11 @@ export const useEvents = () => {
       });
   }, [queryType, time, page]);
 
-  return { eventList, loading, total, setPage, page };
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    CallApi.get("/cms/slider-items").then(({ data }) => {
+      setList(data);
+    });
+  }, []);
+  return { eventList, loading, total, setPage, page, list };
 };
