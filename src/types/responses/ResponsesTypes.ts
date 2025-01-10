@@ -63,8 +63,8 @@ export interface IHost {
 }
 
 export enum GameMode {
-  mafia = "mafia",
-  golyapoch = "golyapoch",
+  mafia = "Mafia",
+  golyapoch = "Golyapoch",
 }
 
 export interface ICoffeeShopListItem {
