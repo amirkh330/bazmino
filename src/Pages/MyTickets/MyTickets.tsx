@@ -19,6 +19,9 @@ import { Link } from "react-router-dom";
 
 export interface ITicketItem {
   id: number;
+  eventId: number,
+  dateId: number,
+  timeId: number,
   status: string;
   event: IReserveItem;
   ticketAddress: string;
@@ -150,7 +153,7 @@ export const MyTickets = () => {
                     borderColor="amir.secondary"
                     color="amir.secondary"
                     as={Link}
-                    to={`/events/${item.id}/dates/${item.event}/times/${item.event}`}
+                    to={`/events/${item.eventId}/dates/${item.dateId}/times/${item.timeId}`}
                     w="50%"
                   >
                     مشاهده بازی
