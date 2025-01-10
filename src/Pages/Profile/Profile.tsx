@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { CallApi } from "@/settings/axiosConfig";
 import { IUserProfile } from "@/types/responses/ResponsesTypes";
 import { Loading } from "@/components/CoreComponents/Loading/Loading";
+import { Star } from "@phosphor-icons/react/dist/ssr";
 export const Profile = () => {
   const { logout } = useAuthStore();
   const navigate = useNavigate();
@@ -56,11 +57,29 @@ export const Profile = () => {
             justifyContent="space-between"
           >
             <Flex mx="0" alignItems="center" gap="2">
-              <Avatar src={userInfo?.avatarUrl}/>
+              <Avatar src={userInfo?.avatarUrl} />
               <Box>
-                <Text fontWeight={600} fontSize={"16px"} color={"amir.common"}>
-                  {userInfo?.fullName}
-                </Text>
+                <Flex alignItems={"center"} gap="2">
+                  <Text
+                    fontWeight={600}
+                    fontSize={"16px"}
+                    color={"amir.common"}
+                  >
+                    {userInfo?.fullName}
+                  </Text>
+                  <Flex
+                    bgColor={"#5C5C5C"}
+                    px={1}
+                    borderRadius={"4px"}
+                    alignItems={"center"}
+                    color={"#E7E7E7"}
+                    gap="2"
+                    fontSize={"12px"}
+                  >
+                    <Icon as={Star} color={"yellow.500"} weight="fill" />
+                    {userInfo?.rate}
+                  </Flex>
+                </Flex>
                 <Text
                   fontWeight={500}
                   fontSize={"14px"}

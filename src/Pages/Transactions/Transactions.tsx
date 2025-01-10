@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Footer } from "@/components/Common/Footer/Footer";
 import {
   Avatar,
@@ -10,7 +10,21 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Toman } from "@/utils/Toman/Toman";
+import { CallApi } from "@/settings/axiosConfig";
+import { Loading } from "@/components/CoreComponents/Loading/Loading";
 export const Transactions = () => {
+  const [transactionList, setTransactionList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    CallApi.get("/me/transactions")
+      .then(({ data }) => {
+        setTransactionList(data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
   return (
     <chakra.div
       h="calc(100dvh - 56px)"
@@ -19,10 +33,11 @@ export const Transactions = () => {
       m="0"
       justifyContent="space-between"
     >
-      <chakra.div m="0" overflow="auto" mb="4" px="4">
-        {Array(10)
-          .fill(0)
-          .map((_, index) => (
+      {loading ? (
+        <Loading />
+      ) : (
+        <chakra.div m="0" overflow="auto" mb="4" px="4">
+          {transactionList?.map((item:any, index) => (
             <Flex
               key={index}
               alignItems="center"
@@ -42,12 +57,12 @@ export const Transactions = () => {
                   fontWeight={500}
                   color="amir.common"
                 >
-                  سه‌شنبه ۱۲ بهمن
+                  {item.dateTime}
                 </Text>
               </Box>
               <Box mx="0" textAlign={"center"}>
                 <Text fontSize={"14px"} fontWeight={500} color="amir.common">
-                  {Toman(120000)}
+                  {Toman(item.amount | 0)}
                 </Text>
                 <Text
                   my="1"
@@ -56,17 +71,18 @@ export const Transactions = () => {
                   textAlign={"center"}
                   p={"4px"}
                   w={"fit-content"}
-                  bg="green.200"
                   fontWeight={400}
                   fontSize={"12px"}
-                  color="green.700"
+                  bg={item.isSuccess ? "green.200" :"red.200"}
+                  color={item.isSuccess ? "green.700" :"red.700"}
                 >
-                  موفق
+                  {item.isSuccess ? "موفق" : "ناموفق"}
                 </Text>
               </Box>
             </Flex>
           ))}
-      </chakra.div>
+        </chakra.div>
+      )}
       <Footer />
     </chakra.div>
   );
