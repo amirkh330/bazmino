@@ -11,10 +11,6 @@ export const CallApi: AxiosInstance = axios.create({
 
 export const PostApi: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
-  headers: {
-    Accept: "multipart/form-data",
-    "Content-Type": "multipart/form-data",
-  },
   withCredentials: true,
 });
 // CallApi.interceptors.request.use((config) => {

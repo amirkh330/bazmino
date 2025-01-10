@@ -51,6 +51,19 @@ export const MyTickets = () => {
         setLoading(false);
       });
   }, []);
+
+  const renderStatus = (status: string) => {
+    switch (status) {
+      case "Ready":
+        return "";
+      case "Canceled":
+        return <chakra.div bg="red.200" color="red.700">لغو شده</chakra.div>;
+      case "PENDING":
+        return <chakra.div bg="">در انتظار</chakra.div>;
+      default:
+        return "";
+    }
+  };
   return (
     <chakra.div
       display="flex"
@@ -105,6 +118,8 @@ export const MyTickets = () => {
                     height="104px"
                   />
                   <Box mx="0">
+                    {/* {renderStatus(item.status)} */}
+                    {/* //  implement Status for ticket // haj amir */}
                     <Text
                       fontSize={"14px"}
                       fontWeight={400}

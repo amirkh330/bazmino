@@ -1,11 +1,12 @@
 import { CallApi, PostApi } from "@/settings/axiosConfig";
+import { IUserProfile } from "@/types/responses/ResponsesTypes";
 import { useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 type FormData = {
-  avatar: File | null;
+  avatar: File | null | string;
   fullName: string;
   email: string;
   sex: string;
@@ -13,12 +14,19 @@ type FormData = {
 };
 export const useEditProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [data, setData] = useState();
+  const [data, setData] = useState<IUserProfile>();
+  const [loading, setLoading] = useState(false);
+  const [loadingButton, setLoadingButton] = useState(false);
 
   useEffect(() => {
-    CallApi.get("/me/profile").then(({ data }) => {
-      setData(data);
-    });
+    setLoading(true);
+    CallApi.get("/me/profile")
+      .then(({ data }) => {
+        setData(data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const {
@@ -29,32 +37,50 @@ export const useEditProfile = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  useEffect(() => {
+    if (data) {
+      setValue("avatar", data?.avatarUrl);
+      setValue("fullName", data?.fullName);
+      setValue("email", data?.email);
+      setValue("sex", data?.sex);
+      setValue("birthDate", data?.birthDate);
+    }
+  }, [data]);
+
   const toast = useToast();
   const navigate = useNavigate();
 
   const onSubmit = (data: FormData) => {
+    setLoadingButton(true);
+
     const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value as any);
+    Object.keys(data).forEach((key) => {
+      const typedKey = key as keyof FormData;
+      if (typedKey === "avatar" && data[typedKey] instanceof File) {
+        formData.append(key, data[typedKey]);
+      } else {
+        formData.append(key, data[typedKey] as string);
+      }
     });
-    PostApi.put("/me/profile", formData).then(({ data }) => {
-      navigate("/profile");
-      toast({
-        title: "فرم با موفقیت ارسال شد!",
-        status: "success",
-        duration: 3000,
-        position: "top",
+
+    PostApi.put("/me/profile", formData)
+      .then(({ data }) => {
+        navigate("/profile");
+        toast({
+          title: "فرم با موفقیت ارسال شد!",
+          status: "success",
+          duration: 3000,
+          position: "top",
+        });
+      })
+      .finally(() => {
+        setLoadingButton(false);
       });
-    });
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setValue("avatar", file);
-      };
       setValue("avatar", file);
     }
   };
@@ -68,10 +94,12 @@ export const useEditProfile = () => {
   return {
     errors,
     control,
+    loading,
     onSubmit,
     register,
     fileInputRef,
     handleSubmit,
+    loadingButton,
     handleAvatarClick,
     handleImageUpload,
   };
