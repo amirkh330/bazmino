@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { Ticket } from "../Ticket/Ticket";
 import { CallApi } from "@/settings/axiosConfig";
 import { Loading } from "@/components/CoreComponents/Loading/Loading";
+import { Link } from "react-router-dom";
 
 export interface ITicketItem {
   id: number;
@@ -133,6 +134,8 @@ export const MyTickets = () => {
                     variant="outline"
                     borderColor="amir.secondary"
                     color="amir.secondary"
+                    as={Link}
+                    to={`/events/${item.id}/dates/${item.event}/times/${item.event}`}
                     w="50%"
                   >
                     مشاهده بازی

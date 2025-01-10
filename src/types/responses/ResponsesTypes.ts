@@ -78,7 +78,7 @@ export interface ICoffeeShopListItem {
 export interface ICoffeeShopDetail {
   id: number;
   title: string;
-  logoUrl:string
+  logoUrl: string;
   rate: number;
   address: string;
   imageUrls: [];
@@ -86,12 +86,23 @@ export interface ICoffeeShopDetail {
   menuUrl: string;
   facilities: [];
 }
+export interface IUserProfile {
+  phoneNumber: string;
+  currentWalletBalance: number;
+  rate: number;
+  fullName: string;
+  avatarUrl: string;
+  email: string;
+  birthDate: string;
+  birthDateFriendly: string;
+  sex: string;
+}
 
 export enum FacilityType {
-  "Parking"="Parking",
-  "FreeWifi"="FreeWifi",
-  "Meal"="Meal",
-  "Wc"="Wc",
-  "Smoking"="Smoking",
-  "OpenSpace"="OpenSpace"
+  "Parking" = "Parking",
+  "FreeWifi" = "FreeWifi",
+  "Meal" = "Meal",
+  "Wc" = "Wc",
+  "Smoking" = "Smoking",
+  "OpenSpace" = "OpenSpace",
 }

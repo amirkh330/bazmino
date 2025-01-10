@@ -9,6 +9,14 @@ export const CallApi: AxiosInstance = axios.create({
   withCredentials: true,
 });
 
+export const PostApi: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  headers: {
+    Accept: "multipart/form-data",
+    "Content-Type": "multipart/form-data",
+  },
+  withCredentials: true,
+});
 // CallApi.interceptors.request.use((config) => {
 //   config.headers["Cookie"] =
 //     "x-a=CfDJ8Panj9jrdUBNm4AVmhLEI7efenlrE46X8h7VmX7mifQQKp6__v8YAj2bKuZZg7nRua3eUJCBYjtOxVperF1fG-4E4-cgdUDNeX7mkrSAySbwVxwHv2Xq8k4Jh5jpoZGsgKNolV1jd7axUCdBkmwQT3XpcTIShSGvZZQz_hpAG_j3RJc9uETO0EJy7fb37Dus6o-uGaZe-ErmX7gRlHC0B-gJl0LkFokRJ4EX-WTwB072rSMHaH5kZKnm_ENmftVKxiDbZ_QQmJ84rtdz3wGbOylSr1u-X58PVRL-oO4OLw9pYy9FFqgIB4-fXhic8fwWQhE0key1OdlMRjnfOPmKI8G3XFNDUDgCo6PRiMQe7zSlrz-w9GeVLXbFmh5GRQqMZEKYGcsk6gaMWxjHkBshATIQZRbMVC7qi54xWlgXZf5KB60zninl2lfiEl4sB0ffBD9DWunq21j5-o1ufZnrJ2emR_WWVn3_xJqZkkv2IIl0YHbsyEPfjgFB7CcWkTEJyuBCp1horFqK59DFdp_WvGMdYKzlgOfA5oEwvcapJvFo";

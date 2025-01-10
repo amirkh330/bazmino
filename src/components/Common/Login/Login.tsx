@@ -88,6 +88,7 @@ const PhoneNumberStep = ({
         dir="ltr"
         color="amir.common"
         _placeholder="amir.common"
+        _focusVisible={{ borderColor: "amir.primary" }}
         value={phoneNumber}
         onChange={(e) => {
           setPhoneNumber(persianToEnglishNumbers(e.target.value));
@@ -116,11 +117,26 @@ const OtpStep = ({ otp, setOtp, handleSendOtp, loading }: any) => {
     <Box mx="auto" p="4">
       <Text color={"amir.common"}>کد ارسال شده را وارد کنید</Text>
       <HStack my="6" justifyContent={"space-around"} mx="8" dir="ltr">
-        <PinInput value={otp} onChange={e=>setOtp(persianToEnglishNumbers(e))}>
-          <PinInputField color={"amir.common"} />
-          <PinInputField color={"amir.common"} />
-          <PinInputField color={"amir.common"} />
-          <PinInputField color={"amir.common"} />
+        <PinInput
+          value={otp}
+          onChange={(e) => setOtp(persianToEnglishNumbers(e))}
+        >
+          <PinInputField
+            _focusVisible={{ borderColor: "amir.primary" }}
+            color={"amir.common"}
+          />
+          <PinInputField
+            _focusVisible={{ borderColor: "amir.primary" }}
+            color={"amir.common"}
+          />
+          <PinInputField
+            _focusVisible={{ borderColor: "amir.primary" }}
+            color={"amir.common"}
+          />
+          <PinInputField
+            _focusVisible={{ borderColor: "amir.primary" }}
+            color={"amir.common"}
+          />
         </PinInput>
       </HStack>
       <Button

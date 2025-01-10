@@ -1,9 +1,7 @@
 import BottomSheet from "@/components/CoreComponents/BottomSheet/BottomSheet";
 import { Box, Button, Divider, Image, Text, chakra } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { ITicketItem } from "../MyTickets/MyTickets";
-import { useEffect, useState } from "react";
-import { CallApi } from "@/settings/axiosConfig";
-import { Loading } from "@/components/CoreComponents/Loading/Loading";
 
 export const Ticket = ({
   isOpen,
@@ -14,13 +12,7 @@ export const Ticket = ({
   ticketItem: ITicketItem;
   onClose: () => void;
 }) => {
-  // const [qr, setQr] = useState('')
-  // useEffect(() => {
-  //   CallApi.get(ticketItem.ticketAddress).then(({ data }) => {
-  //     setQr(data);
-  //   });
-  // }, []);
-  // // handle control visiblity of bottomsheet
+  
   return (
     <BottomSheet
       title={ticketItem.event.title}
@@ -28,7 +20,7 @@ export const Ticket = ({
       onOpen={() => {}}
       onClose={onClose}
     >
-      <chakra.div px="4" h="65dvh" mx="0">
+      <chakra.div px="4" h="54dvh" mx="0">
         <Text
           textAlign={"start"}
           fontSize={"14px"}
@@ -52,21 +44,21 @@ export const Ticket = ({
             fontWeight={600}
             color={"amir.primary"}
             textAlign={"center"}
+            mb="4"
           >
             {ticketItem.id} - کد رزرو
           </Text>
           <Image src={ticketItem.ticketAddress} w="50%" />
-          {/* {qr?
-          <Image src={ticketItem.ticketAddress} w="50%" />
-          :
-          <Loading />
-          } */}
+        
           <Divider my="6" borderColor={"amir.common"} variant="dashed" />
           <Button
             w="full"
+            as={Link}
             variant="outline"
-            borderColor="amir.secondary"
             color="amir.secondary"
+            borderColor="amir.secondary"
+            target="_blank"
+            to={ticketItem.ticketAddress}
           >
             دانلود
           </Button>
