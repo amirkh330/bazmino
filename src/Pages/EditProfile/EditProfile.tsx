@@ -58,7 +58,7 @@ export const EditProfile = () => {
               <FormControl>
                 <Center>
                   <Controller
-                    name="avatar"
+                    name="avatarFile"
                     control={control}
                     render={({ field }) => {
                       return (

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 type FormData = {
-  avatar: File | null | string;
+  avatarFile: File | null | string;
   fullName: string;
   email: string;
   sex: string;
@@ -39,7 +39,7 @@ export const useEditProfile = () => {
 
   useEffect(() => {
     if (data) {
-      setValue("avatar", data?.avatarUrl);
+      setValue("avatarFile", data?.avatarUrl);
       setValue("fullName", data?.fullName);
       setValue("email", data?.email);
       setValue("sex", data?.sex);
@@ -56,7 +56,7 @@ export const useEditProfile = () => {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       const typedKey = key as keyof FormData;
-      if (typedKey === "avatar" && data[typedKey] instanceof File) {
+      if (typedKey === "avatarFile" && data[typedKey] instanceof File) {
         formData.append(key, data[typedKey]);
       } else {
         formData.append(key, data[typedKey] as string);
@@ -81,7 +81,7 @@ export const useEditProfile = () => {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setValue("avatar", file);
+      setValue("avatarFile", file);
     }
   };
 
