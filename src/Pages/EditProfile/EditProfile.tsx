@@ -20,30 +20,21 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { Controller } from "react-hook-form";
 import { Camera } from "@phosphor-icons/react/dist/ssr";
+import gregorian from "react-date-object/calendars/gregorian";
+import gregorian_en from "react-date-object/locales/gregorian_en";
+import DateObject from "react-date-object";
 
 export const EditProfile = () => {
-  const { handleSubmit, onSubmit, avatarFile, register, errors, control } =
-    useEditProfile();
-
-  const [image, setImage] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleAvatarClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
+  const {
+    errors,
+    control,
+    onSubmit,
+    register,
+    fileInputRef,
+    handleSubmit,
+    handleAvatarClick,
+    handleImageUpload,
+  } = useEditProfile();
 
   return (
     <chakra.div
@@ -60,7 +51,27 @@ export const EditProfile = () => {
             {/* Avatar */}
             <FormControl>
               <Center>
-                <Avatar w={"80px"} h={"80px"} onClick={handleAvatarClick} />
+                <Controller
+                  name="avatar"
+                  control={control}
+                  render={({ field }) => {
+                    console.log('field:', field)
+                    return (
+                      <Avatar
+                        src={field.value instanceof File ? URL.createObjectURL(field.value) : field.value || undefined}
+                        w={"80px"}
+                        h={"80px"}
+                        onClick={handleAvatarClick}
+                      />
+                    );
+                  }}
+                />
+                {/* <Avatar
+                  src={""}
+                  w={"80px"}
+                  h={"80px"}
+                  onClick={handleAvatarClick}
+                /> */}
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -124,9 +135,16 @@ export const EditProfile = () => {
                 control={control}
                 render={({ field }) => (
                   <DatePicker
-                    // {...field}
-                    onChange={field.onChange}
-                    value={field.value}
+                    onChange={(e: any) =>
+                      field.onChange(
+                        new DateObject(e)
+                          .convert(gregorian, gregorian_en)
+                          .format("YYYY-MM-DD")
+                      )
+                    }
+                    value={new DateObject(field.value)
+                      .convert(persian, persian_fa)
+                      .format("YYYY-MM-DD")}
                     containerStyle={{
                       width: "100%",
                     }}

@@ -1,18 +1,20 @@
 import { CallApi, PostApi } from "@/settings/axiosConfig";
 import { useToast } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 type FormData = {
-  avatar: FileList | null;
+  avatar: File | null;
   fullName: string;
   email: string;
   sex: string;
   birthDate: string;
 };
 export const useEditProfile = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [data, setData] = useState();
+
   useEffect(() => {
     CallApi.get("/me/profile").then(({ data }) => {
       setData(data);
@@ -22,13 +24,13 @@ export const useEditProfile = () => {
   const {
     register,
     handleSubmit,
-    watch,
     control,
-    formState: { errors,  },
+    setValue,
+    formState: { errors },
   } = useForm<FormData>();
+
   const toast = useToast();
   const navigate = useNavigate();
-  const avatarFile = watch("avatar");
 
   const onSubmit = (data: FormData) => {
     const formData = new FormData();
@@ -46,5 +48,31 @@ export const useEditProfile = () => {
     });
   };
 
-  return { handleSubmit, onSubmit, avatarFile, register, errors, control };
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setValue("avatar", file);
+      };
+      setValue("avatar", file);
+    }
+  };
+
+  const handleAvatarClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return {
+    errors,
+    control,
+    onSubmit,
+    register,
+    fileInputRef,
+    handleSubmit,
+    handleAvatarClick,
+    handleImageUpload,
+  };
 };
