@@ -16,6 +16,7 @@ import { PaymentSuccess } from "@/Pages/Payment-Success/PaymentSuccess";
 import { CoffeeShopDetail } from "@/Pages/CoffeeShopDetail/CoffeeShopDetail";
 import useAuthStore from "@/store/authStore";
 import { Host } from "@/Pages/Host/Host";
+import { Camera } from "@/Pages/Camera/Camera";
 
 const PrivateRoute = ({
   element,
@@ -24,13 +25,14 @@ const PrivateRoute = ({
   element: JSX.Element;
   isHost?: boolean;
 }) => {
-  const { isAuth,isHost:isHostStore } = useAuthStore();
-  if(isHost) {return isAuth && isHostStore ? element : <Navigate to="/" replace />}
-  else return isAuth ? element : <Navigate to="/" replace />;
+  const { isAuth, isHost: isHostStore } = useAuthStore();
+  if (isHost) {
+    return isAuth && isHostStore ? element : <Navigate to="/" replace />;
+  } else return isAuth ? element : <Navigate to="/" replace />;
 };
 
 export const allRoutes: Array<RouteObject> = [
-  { path: "/host", element: <PrivateRoute element={<Host />} isHost/> },
+  { path: "/host", element: <PrivateRoute element={<Host />} isHost /> },
   { path: "/profile", element: <PrivateRoute element={<Profile />} /> },
   {
     path: "/profile/transactions",
@@ -68,6 +70,7 @@ export const allRoutes: Array<RouteObject> = [
     path: "events/:eventId/dates/:dateId/times/:timeId",
     element: <EventDetail />,
   },
+  { path: "/camera", element: <Camera /> },
   { path: "/coffees", element: <CoffeesShops /> },
   { path: "/coffees/:id", element: <CoffeeShopDetail /> },
   { path: "/event-detail/:id", element: <EventDetail /> },
