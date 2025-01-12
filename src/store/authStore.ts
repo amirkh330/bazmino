@@ -3,7 +3,8 @@ import { persist } from "zustand/middleware";
 
 interface AuthState {
   isAuth: boolean;
-  login: () => void;
+  isHost: boolean;
+  login: (isHost: boolean) => void;
   logout: () => void;
 }
 
@@ -11,9 +12,11 @@ const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       isAuth: false,
-      login: () => {
+      isHost: false,
+      login: (isHost) => {
         set({
           isAuth: true,
+          isHost,
         });
       },
 
@@ -22,7 +25,8 @@ const useAuthStore = create<AuthState>()(
           isAuth: false,
         });
         localStorage.clear();
-          document.cookie = "x-a=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.bazmino.com;";
+        document.cookie =
+          "x-a=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.bazmino.com;";
       },
     }),
     {

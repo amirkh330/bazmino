@@ -27,7 +27,7 @@ export const useLogin = () => {
       })
       .then(({ data }) => {
         setServerOtpKey(data);
-        handleLogin();
+        // handleLogin();
         setStep("otp");
       })
       .catch((err) => {

@@ -6,18 +6,21 @@ import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 import useAuthStore from "@/store/authStore";
 import { Login } from "../Login/Login";
+import { log } from "node:console";
 
 export const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { logout } = useAuthStore();
+  const { logout, login, isAuth } = useAuthStore();
   const navigate = useNavigate();
-
   const toast = useToast();
   useEffect(() => {
     CallApi.get(`/me`)
-      .then((res) => {})
-      .catch(({ status }) => {
-        if (status == 401) {
+      .then(( res : any) => {
+        !isAuth && login(res.data.isHost);
+      })
+      .catch((error) => {
+        console.log("status:", error);
+        if (error.status == 401) {
           logout();
           // navigate("/");
           // onOpen();
@@ -35,7 +38,7 @@ export const Layout = () => {
       <Header />
       {/* <Box mx="auto" height="calc(100dvh - 56px)"> */}
       <Outlet />
-      {isOpen && <Login  isOpen={isOpen} onOpen={onOpen} onClose={onClose} />}
+      {isOpen && <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />}
 
       {/* </Box> */}
     </Box>
